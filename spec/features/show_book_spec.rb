@@ -7,7 +7,6 @@ RSpec.describe 'when visitor visits book index', type: :feature do
 
     visit "/books/#{book_1.id}"
 
-    expect(page).to have_content("Books")
     expect(page).to have_content("#{book_1.title}")
     expect(page).to have_content("Author: #{book_1.author}")
     expect(page).to have_content("Page Count: #{book_1.pages}")
