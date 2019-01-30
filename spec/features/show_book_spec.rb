@@ -5,7 +5,7 @@ RSpec.describe 'when visitor visits show book', type: :feature do
     book_1 = Book.create(title: "100 Pictures Of Spiders", author: "Peregrine", pages: 100, published: 2000)
     book_2 = Book.create(title: "What's New Pussy Cat", author: "Noah", pages: 200, published: 1999)
 
-    visit "/books/#{book_1.id}"
+    visit book_path(book_1)
 
     expect(page).to have_content("#{book_1.title}")
     expect(page).to have_content("Author: #{book_1.author}")
