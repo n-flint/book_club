@@ -22,3 +22,6 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+<img width="802" alt="book_club_schema_final" src="https://user-images.githubusercontent.com/34421236/51969310-5041d580-2431-11e9-921c-1df42bbb64df.png">
+
