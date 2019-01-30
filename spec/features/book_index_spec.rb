@@ -9,7 +9,6 @@ describe 'when visitor visits book index', type: :feature do
 
     visit books_path
 
-
     expect(page).to have_content("Books")
     expect(page).to have_content(book_1.title)
     expect(page).to have_content(book_1.author)
