@@ -9,6 +9,7 @@ describe Book, type: :model do
   end
 end
 
+
 describe 'when visitor visits book index', type: :feature do
   it 'can see all books' do
     book_1 = Book.create(title: "100 Pictures Of Spiders", author: "Peregrine", pages: 100, published: 2000)
