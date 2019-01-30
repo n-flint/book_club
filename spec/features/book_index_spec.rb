@@ -1,6 +1,15 @@
 require 'rails_helper'
 
-RSpec.describe 'when visitor visits book index', type: :feature do
+describe Book, type: :model do
+  describe "validations" do
+    it {should validate_presence_of(:title)}
+    it {should validate_presence_of(:author)}
+    it {should validate_presence_of(:pages)}
+    it {should validate_presence_of(:published)}
+  end
+end
+
+describe 'when visitor visits book index', type: :feature do
   it 'can see all books' do
     book_1 = Book.create(title: "100 Pictures Of Spiders", author: "Peregrine", pages: 100, published: 2000)
     book_2 = Book.create(title: "What's New Pussy Cat", author: "Noah", pages: 200, published: 1999)

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'when visitor visits book index', type: :feature do
+RSpec.describe 'when visitor visits show book', type: :feature do
   it 'can see a single book' do
     book_1 = Book.create(title: "100 Pictures Of Spiders", author: "Peregrine", pages: 100, published: 2000)
     book_2 = Book.create(title: "What's New Pussy Cat", author: "Noah", pages: 200, published: 1999)
