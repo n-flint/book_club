@@ -31,6 +31,8 @@ RSpec.describe 'when visitor visits show book', type: :feature do
     visit book_path(@book_1)
 
     expect(page).to have_link("Add Review", href: new_review_path)
+    click_link("Add Review")
+    expect(current_path).to eq(new_review_path)
 
   end
 end
