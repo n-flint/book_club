@@ -5,10 +5,10 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    @user = User.find_by(name: params[:review][:user])
-    @user = User.create(name: params[:review][:user]) unless @user
-    @review = @user.reviews.new(review_params)
+    @book = Book.find(params[:book_id])
+    @review = @book.reviews.create(review_params)
 
+    # binding.pry
     if @review.save
       redirect_to book_path(params[:book_id])
     else
@@ -19,6 +19,9 @@ class ReviewsController < ApplicationController
 
   private
   def review_params
-    params.require(:review).permit(:title, :rating, :review)
+    parameters = params.require(:review).permit(:title, :user_id, :rating, :review)
+    @user = User.find_or_create_by(name: params[:review][:user])
+    parameters[:user] = @user
+    parameters
   end
 end
