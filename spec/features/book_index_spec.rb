@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'when visitor visits book index', type: :feature do
+RSpec.describe 'when visitor visits book index', type: :feature do
   it 'can see all books' do
     cover_1 = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd3cgsv8lMoNU4g8dDN1hUqKlXAR3DTITUd5rl1tMuYds_wAP6"
     cover_2 = "https://static.seibertron.com/images/toys/uploads/1542829964-unicron-retailer-incentive-nick-roache.jpg"
@@ -22,4 +22,6 @@ describe 'when visitor visits book index', type: :feature do
     expect(page).to have_content(book_2.published)
     expect(page).to have_css("img[src*='https://static.seibertron.com/images/toys/uploads/1542829964-unicron-retailer-incentive-nick-roache.jpg']")
   end
+
+
 end

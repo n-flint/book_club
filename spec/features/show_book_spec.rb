@@ -13,6 +13,8 @@ RSpec.describe 'when visitor visits show book', type: :feature do
 
     visit book_path(@book_1)
 
+    save_and_open_page
+
     expect(page).to have_content("#{@book_1.title}")
     expect(page).to have_content("Author: #{@book_1.author}")
     expect(page).to have_content("Page Count: #{@book_1.pages}")
@@ -30,9 +32,9 @@ RSpec.describe 'when visitor visits show book', type: :feature do
 
     visit book_path(@book_1)
 
-    expect(page).to have_link("Add Review", href: new_review_path)
+    expect(page).to have_link("Add Review", href: new_book_review_path(@book_1))
     click_link("Add Review")
-    expect(current_path).to eq(new_review_path)
+    expect(current_path).to eq(new_book_review_path(@book_1))
 
   end
 end
