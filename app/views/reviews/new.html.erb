@@ -1,0 +1,15 @@
+<h2>Add Review for <%= @book.title %></h2>
+
+<img src=<%= @book.cover %> alt="book cover">
+
+<%= form_for [@book, @review] do |f| %>
+<%= f.label :title %>
+<%= f.text_field :title %>
+<%= f.label :Username %>
+<%= f.text_field :user %>
+<%= f.label :rating %>
+<%= f.number_field :rating %>
+<%= f.label :review %>
+<%= f.text_field :review %>
+<%= f.submit %>
+<% end %>
