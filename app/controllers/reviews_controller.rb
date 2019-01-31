@@ -5,8 +5,8 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    @user = User.find_by(name: params[:review_user])
-    @user = User.create(name: params[:review_user]) unless @user
+    @user = User.find_by(name: params[:review][:user])
+    @user = User.create(name: params[:review][:user]) unless @user
     @review = @user.reviews.new(review_params)
 
     if @review.save

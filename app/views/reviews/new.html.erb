@@ -5,11 +5,15 @@
 <%= form_for [@book, @review] do |f| %>
 <%= f.label :title %>
 <%= f.text_field :title %>
-<%= f.label :Username %>
+
+<%= f.label :user, "Username" %>
 <%= f.text_field :user %>
+
 <%= f.label :rating %>
 <%= f.number_field :rating %>
+
 <%= f.label :review %>
 <%= f.text_field :review %>
+
 <%= f.submit %>
 <% end %>
