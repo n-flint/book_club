@@ -13,8 +13,6 @@ RSpec.describe 'when visitor visits show book', type: :feature do
 
     visit book_path(@book_1)
 
-    save_and_open_page
-
     expect(page).to have_content("#{@book_1.title}")
     expect(page).to have_content("Author: #{@book_1.author}")
     expect(page).to have_content("Page Count: #{@book_1.pages}")

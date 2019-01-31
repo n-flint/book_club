@@ -10,6 +10,12 @@ RSpec.describe 'when visitor visits new review', type: :feature do
     visit new_book_review_path(book_1)
 
     expect(page).to have_content("Add Review for #{book_1.title}")
+    expect(page).to have_content("Title")
+    expect(page).to have_content("Username")
+    expect(page).to have_content("Rating")
+    expect(page).to have_content("Review")
+    expect(page).to have_button("Create Review")
+
   end
 
 end
