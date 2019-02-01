@@ -8,7 +8,6 @@ class ReviewsController < ApplicationController
     @book = Book.find(params[:book_id])
     @review = @book.reviews.create(review_params)
 
-    # binding.pry
     if @review.save
       redirect_to book_path(params[:book_id])
     else
