@@ -35,7 +35,7 @@ RSpec.describe 'when visitor visits show book', type: :feature do
     expect(current_path).to eq(new_book_review_path(@book_1))
   end
 
-  xit 'lists all reviews for book on show page' do
+  it 'lists all reviews for book on show page' do
     user_1 = User.create(name: "Tim Allen")
     user_2 = User.create(name: "Scott Thomas")
     review_1 = @book_1.reviews.create(title: "Best book ever", user_id: user_1.id, rating: 5, review: "A must read")
@@ -43,14 +43,14 @@ RSpec.describe 'when visitor visits show book', type: :feature do
     review_3 = @book_2.reviews.create(title: "New Favorite book ever", user_id: user_1.id, rating: 5, review: "A tour de force")
 
     visit book_path(@book_1)
-
+    save_and_open_page
     expect(page).to have_content(review_1.title)
-    expect(page).to have_content(user_1.name)
+    expect(page).to have_link(user_1.name)
     expect(page).to have_content(review_1.rating)
     expect(page).to have_content(review_1.review)
 
     expect(page).to have_content(review_2.title)
-    expect(page).to have_content(user_2.name)
+    expect(page).to have_link(user_2.name)
     expect(page).to have_content(review_2.rating)
     expect(page).to have_content(review_2.review)
   end
