@@ -43,7 +43,7 @@ RSpec.describe 'when visitor visits show book', type: :feature do
     review_3 = @book_2.reviews.create(title: "New Favorite book ever", user_id: user_1.id, rating: 5, review: "A tour de force")
 
     visit book_path(@book_1)
-    save_and_open_page
+    
     expect(page).to have_content(review_1.title)
     expect(page).to have_link(user_1.name)
     expect(page).to have_content(review_1.rating)
