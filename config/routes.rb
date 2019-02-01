@@ -6,4 +6,5 @@ Rails.application.routes.draw do
     resources :reviews
   end
   resources :authors
+  resources :users
 end
