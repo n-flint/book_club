@@ -33,6 +33,25 @@ RSpec.describe 'when visitor visits show book', type: :feature do
     expect(page).to have_link("Add Review", href: new_book_review_path(@book_1))
     click_link("Add Review")
     expect(current_path).to eq(new_book_review_path(@book_1))
+  end
 
+  it 'lists all reviews for book on show page' do
+    user_1 = User.create(name: "Tim Allen")
+    user_2 = User.create(name: "Scott Thomas")
+    review_1 = @book_1.reviews.create(title: "Best book ever", user_id: user_1.id, rating: 5, review: "A must read")
+    review_2 = @book_1.reviews.create(title: "An OK Read", user_id: user_2.id, rating: 3, review: "Take it or leave it")
+    review_3 = @book_2.reviews.create(title: "New Favorite book ever", user_id: user_1.id, rating: 5, review: "A tour de force")
+
+    visit book_path(@book_1)
+    
+    expect(page).to have_content(review_1.title)
+    expect(page).to have_link(user_1.name)
+    expect(page).to have_content(review_1.rating)
+    expect(page).to have_content(review_1.review)
+
+    expect(page).to have_content(review_2.title)
+    expect(page).to have_link(user_2.name)
+    expect(page).to have_content(review_2.rating)
+    expect(page).to have_content(review_2.review)
   end
 end
