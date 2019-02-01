@@ -10,7 +10,7 @@
 <%= f.text_field :user %>
 
 <%= f.label :rating %>
-<%= f.number_field :rating %>
+<%= f.number_field :rating, in: 1..5 %>
 
 <%= f.label :review %>
 <%= f.text_field :review %>
