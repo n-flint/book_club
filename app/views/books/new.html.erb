@@ -1,0 +1,17 @@
+<h2>Add Book</h2>
+
+<%= form_for @book do |f| %>
+<%= f.label :title %>
+<%= f.text_field :title %>
+
+<%= f.label :author, "Author(s)" %>
+<%= f.text_field :author %>
+
+<%= f.label :published, "Publication Year" %>
+<%= f.number_field :published, in: 1455..2019 %>
+
+<%= f.label :pages, "Page Count"%>
+<%= f.text_field :pages %>
+
+<%= f.submit "Add Book"%>
+<% end %>
