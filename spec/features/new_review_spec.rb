@@ -106,7 +106,7 @@ RSpec.describe 'when visitor visits new review', type: :feature do
     fill_in "review_user", with: "Tim Allen"
     fill_in "review_rating", with: 5
     fill_in "review_review", with: "This is a must read. I loved every sentence!"
-    
+
     click_button "Create Review"
 
     expect(current_path).to eq(book_path(@book_1))
