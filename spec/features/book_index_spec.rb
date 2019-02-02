@@ -23,5 +23,11 @@ RSpec.describe 'when visitor visits book index', type: :feature do
     expect(page).to have_css("img[src*='https://static.seibertron.com/images/toys/uploads/1542829964-unicron-retailer-incentive-nick-roache.jpg']")
   end
 
+  it 'sees a nav bar' do
+
+    visit books_path
+
+    expect(page).to have_link("Add Book")
+  end
 
 end
