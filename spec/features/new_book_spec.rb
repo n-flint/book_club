@@ -13,4 +13,20 @@ RSpec.describe 'when visitor visits new book page', type: :feature do
     expect(page).to have_button("Add Book")
   end
 
+  it 'redirects to book show page if form is saved' do
+
+    visit new_book_path
+
+    fill_in "book_title", with: "Dog Wizards"
+    fill_in "book_author", with: "Tim Allen, Noah Flint"
+    fill_in "book_pages", with: 320
+    fill_in "book_published", with: 2019
+
+    click_button "Add Book"
+
+    book = Book.all.first
+    
+    expect(current_path).to eq(book_path(book))
+  end
+
 end
