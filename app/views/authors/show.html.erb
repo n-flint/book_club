@@ -1,0 +1,11 @@
+<h1><%= @author.name %></h1>
+<% @author.books.each do |book| %>
+<section class=<%= "book-#{book.id}" %>>
+  <a href=<%= book_path(book) %>><%= book.title %></a>
+  <% @co_authors.each do |author| %>
+    <a href=<%= author_path(author) %>><%= author.name %></a>
+  <% end %>
+  <p>Publication Year: <%= book.published %></p>
+  <p>Page Count: <%= book.pages %></p>
+<% end %>
+</section>
