@@ -7,8 +7,25 @@ RSpec.describe 'when visitor visits show book', type: :feature do
     @cover_2 = "https://static.seibertron.com/images/toys/uploads/1542829964-unicron-retailer-incentive-nick-roache.jpg"
     @book_1 = Book.create(title: "100 Pictures Of Spiders", pages: 100, published: 2000, cover: @cover_1)
     @book_1.authors.create(name: "Peregrine")
+    @book_3 = Book.create(title: "Killing Time", pages: 105, published: 1992, cover: @cover_1)
+    @book_3.authors.create(name: "Peregrine")
+    @book_4 = Book.create(title: "Testing Books", pages: 200, published: 2010, cover: @cover_1)
+    @book_4.authors.create(name: "Peregrine")
+    @book_5 = Book.create(title: "What's UP? You Know, You Know", pages: 1, published: 2019, cover: @cover_1)
+    @book_5.authors.create(name: "Peregrine")
+
+    @user_1 = User.create(name: "Tim Allen")
+    @user_2 = User.create(name: "Scott Thomas")
+    @review_1 = @book_1.reviews.create(title: "Best book ever", user_id: @user_1.id, rating: 5, review: "A must read")
+    @review_2 = @book_1.reviews.create(title: "Goody bookie", user_id: @user_2.id, rating: 4, review: "Good good")
+    @review_4 = @book_1.reviews.create(title: "Kinda sorta", user_id: @user_1.id, rating: 3, review: "Eh")
+    @review_5 = @book_1.reviews.create(title: "An OKish Read", user_id: @user_2.id, rating: 2, review: "Probably leave it")
+    @review_6 = @book_1.reviews.create(title: "BOO", user_id: @user_1.id, rating: 1, review: "I died inside")
+    @review_7 = @book_1.reviews.create(title: "Awful", user_id: @user_2.id, rating: 1, review: "Leave it!")
+
     @book_2 = Book.create(title: "What's New Pussy Cat", pages: 200, published: 1999, cover: @cover_2)
     @book_2.authors.create(name: "Noah")
+    @review_3 = @book_2.reviews.create(title: "New Favorite book ever", user_id: @user_1.id, rating: 5, review: "A tour de force")
   end
 
   it 'can see a single book' do
@@ -38,22 +55,43 @@ RSpec.describe 'when visitor visits show book', type: :feature do
   end
 
   it 'lists all reviews for book on show page' do
-    user_1 = User.create(name: "Tim Allen")
-    user_2 = User.create(name: "Scott Thomas")
-    review_1 = @book_1.reviews.create(title: "Best book ever", user_id: user_1.id, rating: 5, review: "A must read")
-    review_2 = @book_1.reviews.create(title: "An OK Read", user_id: user_2.id, rating: 3, review: "Take it or leave it")
-    review_3 = @book_2.reviews.create(title: "New Favorite book ever", user_id: user_1.id, rating: 5, review: "A tour de force")
 
     visit book_path(@book_1)
 
-    expect(page).to have_content(review_1.title)
-    expect(page).to have_link(user_1.name)
-    expect(page).to have_content(review_1.rating)
-    expect(page).to have_content(review_1.review)
+    expect(page).to have_content(@review_1.title)
+    expect(page).to have_link(@user_1.name)
+    expect(page).to have_content(@review_1.rating)
+    expect(page).to have_content(@review_1.review)
 
-    expect(page).to have_content(review_2.title)
-    expect(page).to have_link(user_2.name)
-    expect(page).to have_content(review_2.rating)
-    expect(page).to have_content(review_2.review)
+    expect(page).to have_content(@review_2.title)
+    expect(page).to have_link(@user_2.name)
+    expect(page).to have_content(@review_2.rating)
+    expect(page).to have_content(@review_2.review)
+  end
+
+  it 'sees stats area with 3 highest/lowest rated and average rating' do
+
+    visit book_path(@book_1)
+
+    within '#best-reviews' do
+      expect(page).to have_content("Best 3 Reviews")
+      expect(page).to have_content("Title: ")
+      expect(page).to have_content("Rating: ")
+      expect(page).to have_content("Reviewer: ")
+      expect(page).to_not have_content()
+    end
+
+    within '#worst-reviews' do
+      expect(page).to have_content("Worst 3 Reviews")
+      expect(page).to have_content("Title: ")
+      expect(page).to have_content("Rating: ")
+      expect(page).to have_content("Reviewer: ")
+      expect(page).to_not have_content()
+    end
+
+    within '#average-review' do
+      expect(page).to have_content("Average Review Score")
+      expect(page).to have_content("")
+    end
   end
 end
