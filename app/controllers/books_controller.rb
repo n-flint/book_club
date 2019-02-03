@@ -25,7 +25,7 @@ class BooksController < ApplicationController
   private
   def create_relation
     Author.all.pluck(:id).each do |id|
-      BookAuthor.create(book_id: @book.id, author_id: id)
+      BookAuthor.find_or_create_by(book_id: @book.id, author_id: id)
     end
   end
 
