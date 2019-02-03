@@ -2,7 +2,7 @@
 <a href=<%= new_book_path %>>Add Book</a>
 <% @books.each do |book| %>
 <h3><%= book.title %></h3>
-<p><%= book.author %></p>
+<p><%= book.author_names %></p>
 <p><%= book.pages %></p>
 <p><%= book.published %></p>
 <img src=<%= book.cover %> alt="book cover">

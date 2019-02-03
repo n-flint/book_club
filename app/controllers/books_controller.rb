@@ -7,7 +7,10 @@ class BooksController < ApplicationController
   def create
     @book = Book.create(book_params)
     if @book.save
-      create_relation
+      authors = params[:book][:authors].split(',')
+      authors = authors.each do |name|
+        @book.authors.find_or_create_by(name: name.strip.titleize)
+      end
       redirect_to book_path(@book)
     else
       render :new
@@ -23,18 +26,7 @@ class BooksController < ApplicationController
   end
 
   private
-  def create_relation
-    Author.all.pluck(:id).each do |id|
-      BookAuthor.find_or_create_by(book_id: @book.id, author_id: id)
-    end
-  end
-
   def book_params
-    authors = params[:book][:author].split(',')
-    authors = authors.each do |name|
-      Author.find_or_create_by(name: name.strip.titleize)
-    end
-    params[:book][:author] = params[:book][:author].titleize
-    params.require(:book).permit(:title, :author, :pages, :published)
+    params.require(:book).permit(:title, :pages, :published)
   end
 end

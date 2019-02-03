@@ -18,7 +18,7 @@ RSpec.describe 'when visitor visits new book page', type: :feature do
     visit new_book_path
 
     fill_in "book_title", with: "Dog Wizards"
-    fill_in "book_author", with: "Tim Allen, Noah Flint"
+    fill_in "book_authors", with: "Tim Allen, Noah Flint"
     fill_in "book_pages", with: 320
     fill_in "book_published", with: 2019
 
@@ -34,7 +34,7 @@ RSpec.describe 'when visitor visits new book page', type: :feature do
     visit new_book_path
 
     fill_in "book_title", with: "Dog Wizards"
-    fill_in "book_author", with: "tim allen, noah flint"
+    fill_in "book_authors", with: "tim allen, noah flint"
     fill_in "book_pages", with: 320
     fill_in "book_published", with: 2019
 
