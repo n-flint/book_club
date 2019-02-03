@@ -28,11 +28,13 @@ class BooksController < ApplicationController
       BookAuthor.create(book_id: @book.id, author_id: id)
     end
   end
-  
+
   def book_params
     authors = params[:book][:author].split(',')
-    authors = authors.each do |name| Author.find_or_create_by(name: name.strip)
+    authors = authors.each do |name|
+      Author.find_or_create_by(name: name.strip.titleize)
     end
+    params[:book][:author] = params[:book][:author].titleize
     params.require(:book).permit(:title, :author, :pages, :published)
   end
 end
