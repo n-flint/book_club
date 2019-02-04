@@ -9,6 +9,7 @@ class ReviewsController < ApplicationController
     @book = Book.find(params[:book_id])
     @review = @book.reviews.create(review_params)
     if @review.save
+      @book.update(average_rating: @book.average_score)
       redirect_to book_path(params[:book_id])
     else
       @book = Book.find(params[:book_id])
