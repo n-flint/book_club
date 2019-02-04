@@ -6,6 +6,14 @@ class Book < ApplicationRecord
   has_many :authors, through: :book_authors
   has_many :reviews
 
+  def self.best
+    order(average_rating: :desc).limit(3)
+  end
+
+  def self.worst
+    order(average_rating: :asc).limit(3)
+  end
+
   def author_names
     authors.pluck(:name).join(', ')
   end
