@@ -75,23 +75,37 @@ RSpec.describe 'when visitor visits show book', type: :feature do
 
     within '#best-reviews' do
       expect(page).to have_content("Best 3 Reviews")
-      expect(page).to have_content("Title: ")
-      expect(page).to have_content("Rating: ")
-      expect(page).to have_content("Reviewer: ")
-      expect(page).to_not have_content()
+      expect(page).to have_content("Title: #{@book_1.best_reviews.first.title}")
+      expect(page).to have_content("Rating: #{@book_1.best_reviews.first.rating}")
+      expect(page).to have_content("Reviewer: #{@book_1.best_reviews.first.user.name}")
+
+      expect(page).to have_content("Title: #{@book_1.best_reviews.second.title}")
+      expect(page).to have_content("Rating: #{@book_1.best_reviews.second.rating}")
+      expect(page).to have_content("Reviewer: #{@book_1.best_reviews.second.user.name}")
+
+      expect(page).to have_content("Title: #{@book_1.best_reviews.third.title}")
+      expect(page).to have_content("Rating: #{@book_1.best_reviews.third.rating}")
+      expect(page).to have_content("Reviewer: #{@book_1.best_reviews.third.user.name}")
     end
 
     within '#worst-reviews' do
       expect(page).to have_content("Worst 3 Reviews")
-      expect(page).to have_content("Title: ")
-      expect(page).to have_content("Rating: ")
-      expect(page).to have_content("Reviewer: ")
-      expect(page).to_not have_content()
+      expect(page).to have_content("Title: #{@book_1.worst_reviews.first.title}")
+      expect(page).to have_content("Rating: #{@book_1.worst_reviews.first.rating}")
+      expect(page).to have_content("Reviewer: #{@book_1.worst_reviews.first.user.name}")
+
+      expect(page).to have_content("Title: #{@book_1.worst_reviews.second.title}")
+      expect(page).to have_content("Rating: #{@book_1.worst_reviews.second.rating}")
+      expect(page).to have_content("Reviewer: #{@book_1.worst_reviews.second.user.name}")
+
+      expect(page).to have_content("Title: #{@book_1.worst_reviews.third.title}")
+      expect(page).to have_content("Rating: #{@book_1.worst_reviews.third.rating}")
+      expect(page).to have_content("Reviewer: #{@book_1.worst_reviews.third.user.name}")
     end
 
     within '#average-review' do
       expect(page).to have_content("Average Review Score")
-      expect(page).to have_content("")
+      expect(page).to have_content(@book_1.average_score)
     end
   end
 end
