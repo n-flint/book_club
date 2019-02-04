@@ -19,6 +19,7 @@ class BooksController < ApplicationController
 
   def index
     @books = Book.all
+    @top_users = User.most_reviews
   end
 
   def show
