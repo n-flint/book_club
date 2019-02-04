@@ -1,5 +1,30 @@
+<% if @book.reviews != [] %>
+  <section id="best-reviews">
+    <h4>Best 3 Reviews</h4>
+    <% @book.best_reviews.each do |review| %>
+      <p>Title: <%= review.title %></p>
+      <p>Rating: <%= review.rating %></p>
+      <p>Reviewer: <%= review.user.name %></p>
+      <br/>
+    <% end %>
+  </section>
+  <section id="worst-reviews">
+    <h4>Worst 3 Reviews</h4>
+    <% @book.worst_reviews.each do |review| %>
+    <p>Title: <%= review.title %></p>
+    <p>Rating: <%= review.rating %></p>
+    <p>Reviewer: <%= review.user.name %></p>
+    <br/>
+    <% end %>
+  </section>
+  <section id="average-review">
+    <h4>Average Review Score</h4>
+    <p><%= @book.average_score %></p>
+  </section>
+<% end %>
+
 <h1><%= @book.title %></h1>
-<p>Author: <%= @book.author %></p>
+<p>Author(s): <%= @book.author_names %></p>
 <p>Page Count: <%= @book.pages %></p>
 <p>Publication Date: <%= @book.published %></p>
 <img src=<%= @book.cover %> alt="book cover">

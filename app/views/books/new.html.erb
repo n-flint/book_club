@@ -4,14 +4,17 @@
 <%= f.label :title %>
 <%= f.text_field :title %>
 
-<%= f.label :author, "Author(s)" %>
-<%= f.text_field :author %>
+<%= f.label :authors, "Author(s)" %>
+<%= f.text_field :authors, value: '' %>
 
 <%= f.label :published, "Publication Year" %>
 <%= f.number_field :published, in: 1455..2019 %>
 
 <%= f.label :pages, "Page Count"%>
 <%= f.text_field :pages %>
+
+<%= f.label :cover, "Cover Image (optional)"%>
+<%= f.text_field :cover %>
 
 <%= f.submit "Add Book"%>
 <% end %>
