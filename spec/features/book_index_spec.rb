@@ -70,9 +70,6 @@ RSpec.describe 'when visitor visits book index', type: :feature do
 
     visit books_path
 
-    # save_and_open_page
-    binding.pry
-
     within '#best-books' do
       expect(page).to have_content("3 Highest Rated Books")
       expect(page).to have_content(@books.best.first.title)
@@ -108,6 +105,44 @@ RSpec.describe 'when visitor visits book index', type: :feature do
       expect(page).to have_content(@top_users.third.name)
       expect(page).to have_content("Review Count: #{@top_users.third.review_count}")
     end
+  end
+
+  it 'sees an average review for each book' do
+
+    visit books_path
+
+    within "#book-#{@book_1.id}" do
+      within ".book-info" do
+        expect(page).to have_content("Average Rating: #{@book_1.average_score}")
+
+        expect(page).to_not have_content("Average Rating: #{@book_2.average_score}")
+      end
+    end
+
+    within "#book-#{@book_2.id}" do
+      within ".book-info" do
+        expect(page).to have_content("Average Rating: #{@book_2.average_score}")
+
+        expect(page).to_not have_content("Average Rating: #{@book_1.average_score}")
+      end
+    end
+
+  end
+
+  it 'sees links to sort books' do
+
+    visit books_path
+
+    within ".sort-styles" do
+      expect(page).to have_content("Sort By:")
+      expect(page).to have_link('average rating (highest to lowest)')
+      expect(page).to have_link('average rating (lowest to highest)')
+      expect(page).to have_link('page count (lowest to highest)')
+      expect(page).to have_link('page count (highest to lowest)')
+      expect(page).to have_link('number of reviews (lowest to highest)')
+      expect(page).to have_link('number of reviews (highest to lowest)')
+    end
+
   end
 
 end
