@@ -11,19 +11,19 @@
     <h3>3 Highest Rated Books</h3>
     <% @books.best.each do |book| %>
       <p><%= book.title %>
-      <%= book.average_score %></p>
+      Rating: <%= book.average_score %></p>
     <% end %>
   </section>
   <section id="worst-books">
     <h3>3 Lowest Rated Books</h3>
     <% @books.worst.each do |book| %>
     <p><%= book.title %>
-      <%= book.average_score %></p>
+      Rating: <%= book.average_score %></p>
     <% end %>
   </section>
   <section id="top-users">
     <h3>Most Reviews By:</h3>
-    <% @books.top_users.each do |user| %>
+    <% @top_users.each do |user| %>
       <p><%= user.name %>
       <%= user.review_count %></p>
     <% end %>

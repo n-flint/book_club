@@ -6,10 +6,6 @@ class Book < ApplicationRecord
   has_many :authors, through: :book_authors
   has_many :reviews
 
-  def self.top_users
-    User.all
-  end
-
   def self.best
     order(average_rating: :desc).limit(3)
   end
