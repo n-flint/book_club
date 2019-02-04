@@ -32,6 +32,12 @@ RSpec.describe 'when visitor visits book index', type: :feature do
     @review_5 = @book_1.reviews.create(title: "An OKish Read", user_id: @user_5.id, rating: 2, review: "Probably leave it")
     @review_6 = @book_1.reviews.create(title: "BOO", user_id: @user_6.id, rating: 1, review: "I died inside")
     @review_7 = @book_1.reviews.create(title: "Awful", user_id: @user_7.id, rating: 1, review: "Leave it!")
+    @review_8 = @book_3.reviews.create(title: "Best book ever", user_id: @user_1.id, rating: 5, review: "A must read")
+    @review_9 = @book_3.reviews.create(title: "Goody bookie", user_id: @user_2.id, rating: 5, review: "Good good")
+    @review_10 = @book_4.reviews.create(title: "Kinda sorta", user_id: @user_1.id, rating: 3, review: "Eh")
+    @review_11 = @book_4.reviews.create(title: "An OKish Read", user_id: @user_2.id, rating: 2, review: "Probably leave it")
+    @review_12 = @book_5.reviews.create(title: "BOO", user_id: @user_1.id, rating: 4, review: "I died inside")
+    @review_13 = @book_5.reviews.create(title: "Awful", user_id: @user_2.id, rating: 4, review: "Leave it!")
   end
 
   it 'can see all books' do
@@ -62,6 +68,8 @@ RSpec.describe 'when visitor visits book index', type: :feature do
   it 'sees stats section for 3 highest and lowest books and users with most reviews' do
 
     visit books_path
+
+    binding.pry
 
     within '#best-books' do
       expect(page).to have_content("3 Highest Rated Books")
