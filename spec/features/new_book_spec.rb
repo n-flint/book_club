@@ -25,8 +25,6 @@ RSpec.describe 'when visitor visits new book page', type: :feature do
 
     click_button "Add Book"
 
-    save_and_open_page
-
     book = Book.all.first
 
     expect(current_path).to eq(book_path(book))
