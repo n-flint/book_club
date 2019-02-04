@@ -69,8 +69,6 @@ RSpec.describe 'when visitor visits book index', type: :feature do
 
     visit books_path
 
-    binding.pry
-
     within '#best-books' do
       expect(page).to have_content("3 Highest Rated Books")
       expect(page).to have_content("Title: #{@books.best.first.title}")
