@@ -23,6 +23,12 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
+    @best_review_1 = @book.best_reviews.first
+    @best_review_2 = @book.best_reviews.second
+    @best_review_3 = @book.best_reviews.third
+    @worst_review_1 = @book.worst_reviews.first
+    @worst_review_2 = @book.worst_reviews.second
+    @worst_review_3 = @book.worst_reviews.third
   end
 
   private

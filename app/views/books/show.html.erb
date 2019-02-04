@@ -1,3 +1,36 @@
+<section id="best-reviews">
+  <h4>Best 3 Reviews</h4>
+  <p>Title: <%= @best_review_1.title %></p>
+  <p>Rating: <%= @best_review_1.rating %></p>
+  <p>Reviewer: <%= @best_review_1.user.name %></p>
+  <br/>
+  <p>Title: <%= @best_review_2.title %></p>
+  <p>Rating: <%= @best_review_2.rating %></p>
+  <p>Reviewer: <%= @best_review_2.user.name %></p>
+  <br/>
+  <p>Title: <%= @best_review_3.title %></p>
+  <p>Rating: <%= @best_review_3.rating %></p>
+  <p>Reviewer: <%= @best_review_3.user.name %></p>
+</section>
+<section id="worst-reviews">
+  <h4>Worst 3 Reviews</h4>
+  <p>Title: <%= @worst_review_1.title %></p>
+  <p>Rating: <%= @worst_review_1.rating %></p>
+  <p>Reviewer: <%= @worst_review_1.user.name %></p>
+  <br/>
+  <p>Title: <%= @worst_review_2.title %></p>
+  <p>Rating: <%= @worst_review_2.rating %></p>
+  <p>Reviewer: <%= @worst_review_2.user.name %></p>
+  <br/>
+  <p>Title: <%= @worst_review_3.title %></p>
+  <p>Rating: <%= @worst_review_3.rating %></p>
+  <p>Reviewer: <%= @worst_review_3.user.name %></p>
+</section>
+<section id="average-review">
+  <h4>Average Review Score</h4>
+  <p><%= @book.average_score %></p>
+</section>
+
 <h1><%= @book.title %></h1>
 <p>Author(s): <%= @book.author_names %></p>
 <p>Page Count: <%= @book.pages %></p>

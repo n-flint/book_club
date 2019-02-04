@@ -9,4 +9,17 @@ class Book < ApplicationRecord
   def author_names
     authors.pluck(:name).join(', ')
   end
+
+  def best_reviews
+    reviews.order(rating: :desc).limit(3)
+  end
+
+  def worst_reviews
+    reviews.order(rating: :asc).limit(3)
+  end
+
+  def average_score
+    reviews.average(:rating).round(2)
+  end
+
 end
