@@ -9,6 +9,29 @@ RSpec.describe 'when visitor visits book index', type: :feature do
     @book_1.authors.create(name: "Peregrine")
     @book_2 = Book.create(title: "What's New Pussy Cat", pages: 200, published: 1999, cover: @cover_2)
     @book_2.authors.create(name: "Noah")
+    @book_3 = Book.create(title: "Killing Time", pages: 105, published: 1992, cover: @cover_1)
+    @book_3.authors.create(name: "Peregrine")
+    @book_4 = Book.create(title: "Testing Books", pages: 200, published: 2010, cover: @cover_1)
+    @book_4.authors.create(name: "Peregrine")
+    @book_5 = Book.create(title: "What's UP? You Know, You Know", pages: 1, published: 2019, cover: @cover_1)
+    @book_5.authors.create(name: "Peregrine")
+    @books = Book.all
+
+    @user_1 = User.create(name: "Tim Allen")
+    @user_2 = User.create(name: "Scott Thomas")
+    @user_3 = User.create(name: "Noah Flint")
+    @user_4 = User.create(name: "Peregrine Balas")
+    @user_5 = User.create(name: "Peter Lapicola")
+    @user_6 = User.create(name: "Ian Douglas")
+    @user_7 = User.create(name: "Megan McMahon")
+
+    @review_1 = @book_1.reviews.create(title: "Best book ever", user_id: @user_1.id, rating: 5, review: "A must read")
+    @review_2 = @book_1.reviews.create(title: "Goody bookie", user_id: @user_2.id, rating: 4, review: "Good good")
+    @review_3 = @book_2.reviews.create(title: "New Favorite book ever", user_id: @user_3.id, rating: 5, review: "A tour de force")
+    @review_4 = @book_1.reviews.create(title: "Kinda sorta", user_id: @user_4.id, rating: 3, review: "Eh")
+    @review_5 = @book_1.reviews.create(title: "An OKish Read", user_id: @user_5.id, rating: 2, review: "Probably leave it")
+    @review_6 = @book_1.reviews.create(title: "BOO", user_id: @user_6.id, rating: 1, review: "I died inside")
+    @review_7 = @book_1.reviews.create(title: "Awful", user_id: @user_7.id, rating: 1, review: "Leave it!")
   end
 
   it 'can see all books' do
@@ -36,12 +59,44 @@ RSpec.describe 'when visitor visits book index', type: :feature do
     expect(page).to have_link("Add Book")
   end
 
-  xit 'sees stats section for 3 highest and lowest books and users with most reviews' do
+  it 'sees stats section for 3 highest and lowest books and users with most reviews' do
 
     visit books_path
 
-    within '#book-stats' do
-      expect(page).to have_content()
+    within '#best-books' do
+      expect(page).to have_content("3 Highest Rated Books")
+      expect(page).to have_content("Title: #{@books.best.first.title}")
+      expect(page).to have_content("Rating: #{@books.best.first.average_score}")
+
+      expect(page).to have_content("Title: #{@books.best.second.title}")
+      expect(page).to have_content("Rating: #{@books.best.second.average_score}")
+
+      expect(page).to have_content("Title: #{@books.best.third.title}")
+      expect(page).to have_content("Rating: #{@books.best.third.average_score}")
+    end
+
+    within '#worst-books' do
+      expect(page).to have_content("3 Lowest Rated Books")
+      expect(page).to have_content("Title: #{@books.worst.first.title}")
+      expect(page).to have_content("Rating: #{@books.worst.average_score}")
+
+      expect(page).to have_content("Title: #{@books.worst.second.title}")
+      expect(page).to have_content("Rating: #{@books.worst.average_score}")
+
+      expect(page).to have_content("Title: #{@books.worst.third.title}")
+      expect(page).to have_content("Rating: #{@books.worst.average_score}")
+    end
+
+    within '#top-users' do
+      expect(page).to have_content("Most Reviews By:")
+      expect(page).to have_content(@books.top_users.first.name)
+      expect(page).to have_content("Review Count: #{@books.top_users.first.review_count}")
+
+      expect(page).to have_content(@books.top_users.second.name)
+      expect(page).to have_content("Review Count: #{@books.top_users.second.review_count}")
+
+      expect(page).to have_content(@books.top_users.third.name)
+      expect(page).to have_content("Review Count: #{@books.top_users.third.review_count}")
     end
   end
 
