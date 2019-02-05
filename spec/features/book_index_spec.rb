@@ -91,7 +91,7 @@ RSpec.describe 'when visitor visits book index', type: :feature do
     visit books_path
 
     within '#best-books' do
-      expect(page).to have_content("3 Highest Rated Books")
+      expect(page).to have_content("Highest Rated Books")
       expect(page).to have_content(@books.best.first.title)
       expect(page).to have_content("Rating: #{@books.best.first.average_rating}")
 
@@ -103,7 +103,7 @@ RSpec.describe 'when visitor visits book index', type: :feature do
     end
 
     within '#worst-books' do
-      expect(page).to have_content("3 Lowest Rated Books")
+      expect(page).to have_content("Lowest Rated Books")
       expect(page).to have_content(@books.worst.first.title)
       expect(page).to have_content("Rating: #{@books.worst.first.average_rating}")
 

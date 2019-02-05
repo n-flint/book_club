@@ -11,18 +11,22 @@
   <section id="best-reviews">
     <h4>Best Reviews</h4>
     <% @book.best_reviews.each do |review| %>
-      <p>Title: <%= review.title %></p>
-      <p>Rating: <%= review.rating %></p>
-      <p>Reviewer: <%= link_to review.user.name, user_path(review.user) %></p>
+      <section class='best-review'>
+        <p>Title: <%= review.title %></p>
+        <p>Rating: <%= review.rating %></p>
+        <p>Reviewer: <%= link_to review.user.name, user_path(review.user) %></p>
+      </section>
       <br/>
     <% end %>
   </section>
   <section id="worst-reviews">
     <h4>Worst Reviews</h4>
     <% @book.worst_reviews.each do |review| %>
-    <p>Title: <%= review.title %></p>
-    <p>Rating: <%= review.rating %></p>
-    <p>Reviewer: <%= link_to review.user.name, user_path(review.user) %></p>
+      <section class='worst-review'>
+        <p>Title: <%= review.title %></p>
+        <p>Rating: <%= review.rating %></p>
+        <p>Reviewer: <%= link_to review.user.name, user_path(review.user) %></p>
+      </section>
     <br/>
     <% end %>
   </section>
@@ -45,7 +49,7 @@
 <% @book.reviews.each do |review| %>
 <article id=<%= "review-#{review.id}" %>>
   <h5><%= review.title %></h5>
-  <a href=<%= user_path(review.user) %>><%= review.user.name %></a>
+  <%= link_to  review.user.name, user_path(review.user) %>
   <p>Rating: <%= review.rating %></p>
   <p><%= review.review %></p>
 </article>
