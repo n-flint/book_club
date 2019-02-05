@@ -20,6 +20,7 @@ class ReviewsController < ApplicationController
   private
   def review_params
     parameters = params.require(:review).permit(:title, :user_id, :rating, :review)
+    params[:review][:user] = params[:review][:user].titleize
     @user = User.find_or_create_by(name: params[:review][:user])
     parameters[:user] = @user
     parameters
