@@ -110,5 +110,14 @@ describe Book, type: :model do
 
     end
 
+    it '.top_review' do
+
+      expected = @review_1
+      actual = @book_1.top_review
+
+      expect(actual).to eq(expected)
+
+    end
+
   end
 end
