@@ -126,7 +126,7 @@ RSpec.describe 'when visitor visits new book page', type: :feature do
     fill_in "book_published", with: 2019
 
     click_button "Add Book"
-
+    # save_and_open_page
     expect(page).to have_link("Tim Allen")
     expect(page).to have_link("Noah Flint")
   end
