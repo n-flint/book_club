@@ -3,8 +3,8 @@
 </header>
 
 <nav>
-  <a href=<%= root_path %>>Home</a>
-  <a href=<%= new_book_path %>>Add Book</a>
+  <%= link_to 'Home', root_path %>
+  <%= link_to 'Add Book', new_book_path %>
 </nav>
 
 <section class="book-stats">
@@ -12,14 +12,14 @@
     <h3>3 Highest Rated Books</h3>
     <% @books.best.each do |book| %>
       <p><%= book.title %>
-      Rating: <%= book.average_score %></p>
+      Rating: <%= book.average_score unless book.reviews == [] %></p>
     <% end %>
   </section>
   <section id="worst-books">
     <h3>3 Lowest Rated Books</h3>
     <% @books.worst.each do |book| %>
     <p><%= book.title %>
-      Rating: <%= book.average_score %></p>
+      Rating: <%= book.average_score unless book.reviews == [] %></p>
     <% end %>
   </section>
   <section id="top-users">
@@ -32,19 +32,30 @@
 </section>
 
 <div>
-  <a>Sort Styles</a>
+  <div class='sort-styles'>
+    <p>Sort By:</p>
+    <%= link_to 'average rating (highest to lowest)', books_path(sort: 'avg rating desc') %>
+    <%= link_to 'average rating (lowest to highest)', books_path(sort: 'avg rating asc') %>
+    <%= link_to 'page count (highest to lowest)', books_path(sort: 'pages desc') %>
+    <%= link_to 'page count (lowest to highest)', books_path(sort: 'pages asc') %>
+    <%= link_to 'number of reviews (highest to lowest)', books_path(sort: 'reviews desc') %>
+    <%= link_to 'number of reviews (lowest to highest)', books_path(sort: 'reviews asc') %>
+  </div>
   <a href=<%= new_book_path %>>Add Book</a>
 </div>
 <ul>
   <% @books.each do |book| %>
-  <li id=<%= "book-#{book.id}" %>>
+  <li class='book' id=<%= "book-#{book.id}" %>>
     <h3><%= book.title %></h3>
     <img src=<%= book.cover %> alt="book cover">
     <div class='book-info'>
       <p><%= book.author_names %></p>
       <p>Page Count: <%= book.pages %></p>
       <p>Publication Year: <%= book.published %></p>
-      <p>Average Rating: <%= book.average_score %></p>
+      <% if book.reviews.count > 0 %>
+        <p>Average Rating: <%= book.average_score %></p>
+        <p>Review Count: <%= book.review_count %></p>
+      <% end %>
   </div>
   </li>
   <% end %>

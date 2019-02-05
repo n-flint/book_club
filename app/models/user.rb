@@ -3,7 +3,7 @@ class User < ApplicationRecord
   has_many :reviews
 
   def self.most_reviews
-    joins(:reviews).select('users.*, count(reviews.id) as count_reviews').group(:id).order('count_reviews desc').limit(3)
+    joins(:reviews).select('users.*, COUNT(reviews.id) as count_reviews').group(:id).order('count_reviews desc').limit(3)
   end
 
   def review_count

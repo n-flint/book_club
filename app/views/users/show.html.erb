@@ -1,3 +1,8 @@
+<nav>
+  <%= link_to 'Home', root_path %>
+  <%= link_to 'Browse Books', books_path %>
+</nav>
+
 <h1> <%= @user.name %> </h1>
 <% @user.reviews.each do |review| %>
 <h3>Title: <%= review.title%></h3>

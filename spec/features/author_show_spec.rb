@@ -32,4 +32,13 @@ RSpec.describe 'when visitor visits author show page', type: :feature do
 
   end
 
+  it 'sees a nav bar' do
+
+    visit book_path(@book_1)
+
+    expect(page).to have_link("Home")
+    expect(page).to have_link("Browse Books")
+
+  end
+
 end
