@@ -24,6 +24,7 @@ RSpec.describe 'when visitor visits new review', type: :feature do
     expect(page).to have_css("img[src*='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd3cgsv8lMoNU4g8dDN1hUqKlXAR3DTITUd5rl1tMuYds_wAP6']")
   end
 
+
   it 'stays on page if form is without a review' do
 
     visit new_book_review_path(@book_1)

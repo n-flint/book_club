@@ -59,14 +59,6 @@ RSpec.describe 'when visitor visits book index', type: :feature do
     expect(page).to have_css("img[src*='https://static.seibertron.com/images/toys/uploads/1542829964-unicron-retailer-incentive-nick-roache.jpg']")
   end
 
-  it 'sees a nav bar' do
-
-    visit books_path
-    save_and_open_page
-
-    expect(page).to have_link("Home")
-    expect(page).to have_link("Add Book")
-  end
   xit 'goes to the add book page when link is pressed' do
 
     visit books_path
@@ -76,7 +68,8 @@ RSpec.describe 'when visitor visits book index', type: :feature do
     expect(current_path).to eq(new_book_path)
 
   end
-  it 'goes to the home book page when link is pressed' do
+
+  xit 'goes to the home book page when link is pressed' do
 
     visit books_path
 
@@ -149,7 +142,7 @@ RSpec.describe 'when visitor visits book index', type: :feature do
 
   end
 
-  it 'sees links to sort books' do
+  xit 'sees links to sort books' do
 
     visit books_path
 
