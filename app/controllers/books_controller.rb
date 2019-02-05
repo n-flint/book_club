@@ -21,7 +21,6 @@ class BooksController < ApplicationController
     @navbar = [root_path, new_book_path]
     @books = Book.all
     @top_users = User.most_reviews
-    binding.pry
   end
 
   def show
