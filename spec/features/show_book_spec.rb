@@ -127,7 +127,6 @@ RSpec.describe 'when visitor visits show book', type: :feature do
     click_button('Delete Book')
     expect(current_path).to eq(books_path)
     expect(current_path).to eq(books_path)
-    save_and_open_page
 
   end
 end
