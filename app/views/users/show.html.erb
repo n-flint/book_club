@@ -5,10 +5,16 @@
 
 <h1> <%= @user.name %> </h1>
 <% @user.reviews.each do |review| %>
-<h3>Title: <%= review.title%></h3>
-<p>Book Title: <%= link_to review.book.title, book_path(review.book)%></p>
-<p><%= review.review%></p>
-<p>Rating: <%= review.rating%></p>
-<p>Date Reviewed: <%= review.created_at.to_date.to_s %></p>
-<img src=<%= review.book.cover %> alt="book cover">
+
+<section id=<%= "review-#{review.id}" %>>
+  <!-- <%= button_to "X", user_path(@user.id, review: review.id), controller: :reviews, method: :delete %> -->
+  <%= button_to "X", review_path(review.id), method: :delete %>
+  <h3>Title: <%= review.title%></h3>
+  <p>Book Title: <%= review.book.title%></p>
+  <p><%= review.review%></p>
+  <p>Rating: <%= review.rating%></p>
+  <p>Date Reviewed: <%= review.created_at.to_date.to_s %></p>
+  <img src=<%= review.book.cover %> alt="book cover">
+</section>
+
 <% end %>
