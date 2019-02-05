@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  validates_presence_of :name
+  validates_presence_of :name, uniqueness: true
   has_many :reviews
 
   def self.most_reviews
