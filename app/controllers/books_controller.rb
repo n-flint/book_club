@@ -18,10 +18,25 @@ class BooksController < ApplicationController
   end
 
   def index
-    @navbar = [root_path, new_book_path]
-    @books = Book.all
+    @nav_bar = [root_path, new_book_path]
+    if params[:sort] == 'avg rating desc'
+      @books = Book.order(average_rating: :desc)
+    elsif params[:sort] == 'avg rating asc'
+      @books = Book.order(average_rating: :asc)
+    elsif params[:sort] == 'pages desc'
+      @books = Book.order(pages: :desc)
+    elsif params[:sort] == 'pages asc'
+      @books = Book.order(pages: :asc)
+      binding.pry
+    elsif params[:sort] == 'reviews desc'
+      # @books = Book.sort_by_most_reviews
+      @books = Book.select('books.*, count(reviews.id) as count_reviews').left_outer_joins(:reviews).group(:id).order('count_reviews desc').order(:id)
+    elsif params[:sort] == 'reviews asc'
+      @books = Book.select('books.*, count(reviews.id) as count_reviews').left_outer_joins(:reviews).group(:id).order('count_reviews asc')
+    else
+      @books = Book.all
+    end
     @top_users = User.most_reviews
-    binding.pry
   end
 
   def show

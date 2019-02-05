@@ -1,5 +1,6 @@
 <header>
   <h1>Books</h1>
+
 </header>
 
 <section class="book-stats">
@@ -27,12 +28,20 @@
 </section>
 
 <div>
-  <a>Sort Styles</a>
+  <div class='sort-styles'>
+    <p>Sort By:</p>
+    <%= link_to 'average rating (highest to lowest)', books_path(sort: 'avg rating desc') %>
+    <%= link_to 'average rating (lowest to highest)', books_path(sort: 'avg rating asc') %>
+    <%= link_to 'page count (highest to lowest)', books_path(sort: 'pages desc') %>
+    <%= link_to 'page count (lowest to highest)', books_path(sort: 'pages asc') %>
+    <%= link_to 'number of reviews (highest to lowest)', books_path(sort: 'reviews desc') %>
+    <%= link_to 'number of reviews (lowest to highest)', books_path(sort: 'reviews asc') %>
+  </div>
   <a href=<%= new_book_path %>>Add Book</a>
 </div>
 <ul>
   <% @books.each do |book| %>
-  <li id=<%= "book-#{book.id}" %>>
+  <li class='book' id=<%= "book-#{book.id}" %>>
     <h3><%= book.title %></h3>
     <img src=<%= book.cover %> alt="book cover">
     <div class='book-info'>
@@ -40,6 +49,7 @@
       <p>Page Count: <%= book.pages %></p>
       <p>Publication Year: <%= book.published %></p>
       <p>Average Rating: <%= book.average_score %></p>
+      <p>Review Count: <%= book.review_count %></p>
   </div>
   </li>
   <% end %>

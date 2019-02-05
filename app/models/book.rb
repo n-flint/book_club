@@ -30,4 +30,8 @@ class Book < ApplicationRecord
     reviews.average(:rating).round(2)
   end
 
+  def review_count
+    reviews.count
+  end
+
 end
