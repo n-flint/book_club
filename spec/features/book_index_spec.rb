@@ -59,11 +59,31 @@ RSpec.describe 'when visitor visits book index', type: :feature do
     expect(page).to have_css("img[src*='https://static.seibertron.com/images/toys/uploads/1542829964-unicron-retailer-incentive-nick-roache.jpg']")
   end
 
-  xit 'sees a nav bar' do
+  it 'sees a nav bar' do
+
+    visit books_path
+    save_and_open_page
+
+    expect(page).to have_link("Home")
+    expect(page).to have_link("Add Book")
+  end
+  xit 'goes to the add book page when link is pressed' do
 
     visit books_path
 
-    expect(page).to have_link("Add Book")
+    click_link("Add Book")
+
+    expect(current_path).to eq(new_book_path)
+
+  end
+  it 'goes to the home book page when link is pressed' do
+
+    visit books_path
+
+    click_link("Home")
+
+    expect(current_path).to eq(root_path)
+
   end
 
   it 'sees stats section for 3 highest and lowest books and users with most reviews' do
