@@ -116,6 +116,18 @@ RSpec.describe 'when visitor visits show book', type: :feature do
 
     expect(page).to have_link("Home")
     expect(page).to have_link("Browse Books")
-    
+
+  end
+
+  it 'sees a button to delete book' do
+
+    visit book_path(@book_1)
+
+    expect(page).to have_button('Delete Book')
+    click_button('Delete Book')
+    expect(current_path).to eq(books_path)
+    expect(current_path).to eq(books_path)
+    save_and_open_page
+
   end
 end

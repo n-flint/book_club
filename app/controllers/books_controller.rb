@@ -41,6 +41,13 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
   end
 
+  def destroy
+    @book = Book.find(params[:id])
+    @book.destroy
+    binding.pry
+    redirect_to books_path
+  end
+
   private
   def book_params
     default = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd3cgsv8lMoNU4g8dDN1hUqKlXAR3DTITUd5rl1tMuYds_wAP6'

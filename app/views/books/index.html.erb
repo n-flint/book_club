@@ -12,14 +12,14 @@
     <h3>3 Highest Rated Books</h3>
     <% @books.best.each do |book| %>
       <p><%= book.title %>
-      Rating: <%= book.average_score %></p>
+      Rating: <%= book.average_score unless book.reviews == [] %></p>
     <% end %>
   </section>
   <section id="worst-books">
     <h3>3 Lowest Rated Books</h3>
     <% @books.worst.each do |book| %>
     <p><%= book.title %>
-      Rating: <%= book.average_score %></p>
+      Rating: <%= book.average_score unless book.reviews == [] %></p>
     <% end %>
   </section>
   <section id="top-users">
@@ -52,8 +52,10 @@
       <p><%= book.author_names %></p>
       <p>Page Count: <%= book.pages %></p>
       <p>Publication Year: <%= book.published %></p>
-      <p>Average Rating: <%= book.average_score %></p>
-      <p>Review Count: <%= book.review_count %></p>
+      <% if book.reviews.count > 0 %>
+        <p>Average Rating: <%= book.average_score %></p>
+        <p>Review Count: <%= book.review_count %></p>
+      <% end %>
   </div>
   </li>
   <% end %>

@@ -2,9 +2,9 @@ class Book < ApplicationRecord
   validates_presence_of :title
   validates_presence_of :pages
   validates_presence_of :published
-  has_many :book_authors
+  has_many :book_authors, dependent: :destroy
   has_many :authors, through: :book_authors
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
 
   def self.best
     order(average_rating: :desc).limit(3)
