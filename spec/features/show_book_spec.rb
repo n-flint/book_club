@@ -2,18 +2,6 @@ require 'rails_helper'
 
 RSpec.describe 'when visitor visits show book', type: :feature do
 
-  #
-  #
-  #
-  #
-  #
-  # TODO test for stats
-  #
-  #
-  #
-  #
-  #
-
   before :each do
     @cover_1 = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd3cgsv8lMoNU4g8dDN1hUqKlXAR3DTITUd5rl1tMuYds_wAP6"
     @cover_2 = "https://static.seibertron.com/images/toys/uploads/1542829964-unicron-retailer-incentive-nick-roache.jpg"
@@ -85,10 +73,6 @@ RSpec.describe 'when visitor visits show book', type: :feature do
 
     visit book_path(@book_1)
 
-    # expect(page.all('.merchant')[0]).to have_content('Merchant Name 2, Revenue: $90,000')
-    # expect(page.all('.merchant')[1]).to have_content('Merchant Name 3, Revenue: $80,200')
-    # expect(page.all('.merchant')[2]).to have_content('Merchant Name 1, Revenue: $10,000')
-    
     within '#best-reviews' do
       expect(page).to have_content("Best Reviews")
       expect(page).to have_content("Title: #{@book_1.best_reviews.first.title}")

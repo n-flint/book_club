@@ -53,15 +53,6 @@ describe Book, type: :model do
 
     end
 
-    # it '.sort_by_most_reviews' do
-    #
-    #   expected =
-    #   actual = Book.sort_by_most_reviews
-    #
-    #   expect(actual).to eq(expected)
-    #
-    # end
-
   end
 
   describe "instance methods" do
