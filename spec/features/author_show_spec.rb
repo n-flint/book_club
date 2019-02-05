@@ -19,15 +19,16 @@ RSpec.describe 'when visitor visits author show page', type: :feature do
     within "#book-#{@book_1.id}" do
       expect(page).to have_link(@book_1.title)
       expect(page).to have_link(@book_1.authors.first.name)
-      expect(page).to have_content("Publication Year: 1811")
-      expect(page).to have_content("Page Count: 5000")
+      expect(page).to have_content("Publication Year: #{@book_1.published}")
+      expect(page).to have_content("Page Count: #{@book_1.pages}")
     end
 
     within "#book-#{@book_2.id}" do
       expect(page).to have_link(@book_2.title)
+      expect(page).to have_content("Publication Year: #{@book_2.published}")
+      expect(page).to have_content("Page Count: #{@book_2.pages}")
+
       expect(page).to_not have_link(@book_1.authors.first.name)
-      expect(page).to have_content("Publication Year: 2019")
-      expect(page).to have_content("Page Count: 101")
     end
 
   end

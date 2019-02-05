@@ -47,16 +47,16 @@ RSpec.describe 'when visitor visits book index', type: :feature do
 
     expect(page).to have_content("Books")
     expect(page).to have_content(@book_1.title)
-    expect(page).to have_content("Peregrine")
+    expect(page).to have_content(@book_1.authors.first.name)
     expect(page).to have_content(@book_1.pages)
     expect(page).to have_content(@book_1.published)
-    expect(page).to have_css("img[src*='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd3cgsv8lMoNU4g8dDN1hUqKlXAR3DTITUd5rl1tMuYds_wAP6']")
+    expect(page).to have_css("img[src*='#{@book_1.cover}']")
 
     expect(page).to have_content(@book_2.title)
-    expect(page).to have_content("Noah")
+    expect(page).to have_content(@book_2.authors.first.name)
     expect(page).to have_content(@book_2.pages)
     expect(page).to have_content(@book_2.published)
-    expect(page).to have_css("img[src*='https://static.seibertron.com/images/toys/uploads/1542829964-unicron-retailer-incentive-nick-roache.jpg']")
+    expect(page).to have_css("img[src*='#{@book_2.cover}']")
   end
 
   it 'sees a nav bar' do
