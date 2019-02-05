@@ -35,11 +35,21 @@ RSpec.describe 'when visitor visits author show page', type: :feature do
 
   it 'sees a nav bar' do
 
-    visit book_path(@book_1)
+    visit author_path(@book_2.authors.first)
 
     expect(page).to have_link("Home")
     expect(page).to have_link("Browse Books")
-
   end
 
+  it 'can delete an author' do
+
+    visit author_path(@book_2.authors.last)
+
+    expect(page).to have_button("Delete Author")    
+
+    click_button "Delete Author"
+
+    expect(current_path).to eq(books_path)
+    expect(page).to_not have_content(@book_2.title)
+  end
 end
