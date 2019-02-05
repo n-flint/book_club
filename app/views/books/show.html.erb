@@ -32,7 +32,9 @@
   </section>
 <% end %>
 
-<p>Author(s): <%= @book.author_names %></p>
+<p>Author(s): <% @book.authors.each do |author| %>
+  <%= link_to author.name, author_path(author) %>
+<% end %></p>
 <p>Page Count: <%= @book.pages %></p>
 <p>Publication Date: <%= @book.published %></p>
 <img src=<%= @book.cover %> alt="book cover">
