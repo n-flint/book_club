@@ -13,7 +13,7 @@
     <% @book.best_reviews.each do |review| %>
       <p>Title: <%= review.title %></p>
       <p>Rating: <%= review.rating %></p>
-      <p>Reviewer: <%= review.user.name %></p>
+      <p>Reviewer: <%= link_to review.user.name, user_path(review.user) %></p>
       <br/>
     <% end %>
   </section>
@@ -22,7 +22,7 @@
     <% @book.worst_reviews.each do |review| %>
     <p>Title: <%= review.title %></p>
     <p>Rating: <%= review.rating %></p>
-    <p>Reviewer: <%= review.user.name %></p>
+    <p>Reviewer: <%= link_to review.user.name, user_path(review.user) %></p>
     <br/>
     <% end %>
   </section>
@@ -43,10 +43,12 @@
 
 <h3>Reviews</h3>
 <% @book.reviews.each do |review| %>
-<h5><%= review.title %></h5>
-<a href=<%= user_path(review.user) %>><%= review.user.name %></a>
-<p>Rating: <%= review.rating %></p>
-<p><%= review.review %></p>
+<article id=<%= "review-#{review.id}" %>>
+  <h5><%= review.title %></h5>
+  <a href=<%= user_path(review.user) %>><%= review.user.name %></a>
+  <p>Rating: <%= review.rating %></p>
+  <p><%= review.review %></p>
+</article>
 <% end %>
 
 <%= button_to "Delete Book", book_path(@book), method: :delete %>
