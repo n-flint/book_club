@@ -1,4 +1,12 @@
-<h1><%= @author.name %></h1>
+<header>
+  <h1><%= @author.name %></h1>
+</header>
+
+<nav>
+  <%= link_to 'Home', root_path %>
+  <%= link_to 'Browse Books', books_path %>
+</nav>
+
 <% @author.books.each do |book| %>
 <section id=<%= "book-#{book.id}" %>>
   <a href=<%= book_path(book) %>><%= book.title %></a>

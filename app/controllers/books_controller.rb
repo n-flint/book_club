@@ -26,7 +26,6 @@ class BooksController < ApplicationController
       @books = Book.order(pages: :desc)
     elsif params[:sort] == 'pages asc'
       @books = Book.order(pages: :asc)
-      binding.pry
     elsif params[:sort] == 'reviews desc'
       # @books = Book.sort_by_most_reviews
       @books = Book.select('books.*, count(reviews.id) as count_reviews').left_outer_joins(:reviews).group(:id).order('count_reviews desc').order(:id)
