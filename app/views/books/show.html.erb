@@ -43,7 +43,7 @@
 <p>Publication Date: <%= @book.published %></p>
 <img src=<%= @book.cover %> alt="book cover">
 
-<a href=<%= new_book_review_path(@book) %>>Add Review</a>
+<%= link_to 'Add Review', new_book_review_path(@book) %>
 
 <h3>Reviews</h3>
 <% @book.reviews.each do |review| %>
