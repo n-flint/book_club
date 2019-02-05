@@ -11,6 +11,7 @@ RSpec.describe 'when visitor visits user show page', type: :feature do
     review_1 = create(:review, user_id: user_1.id, book_id: book_1.id)
     review_2 = create(:review, user_id: user_1.id, book_id: book_2.id)
     review_3 = create(:review, user_id: user_2.id, book_id: book_3.id)
+    default_image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd3cgsv8lMoNU4g8dDN1hUqKlXAR3DTITUd5rl1tMuYds_wAP6"
 
     visit user_path(user_1)
 
@@ -19,7 +20,7 @@ RSpec.describe 'when visitor visits user show page', type: :feature do
     expect(page).to have_content("#{review_1.review}")
     expect(page).to have_content("Rating: #{review_1.rating}")
     expect(page).to have_content("Book Title: #{review_1.book.title}")
-    expect(page).to have_css("img[src*='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd3cgsv8lMoNU4g8dDN1hUqKlXAR3DTITUd5rl1tMuYds_wAP6']")
+    expect(page).to have_css("img[src*='#{default_image}']")
     expect(page).to have_content("Date Reviewed: #{review_1.created_at.to_date.to_s}")
     expect(page).to have_content("Title: #{review_2.title}")
     expect(page).to have_no_content("Title: #{review_3.title}")
