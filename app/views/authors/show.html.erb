@@ -9,9 +9,9 @@
 
 <% @author.books.each do |book| %>
 <section id=<%= "book-#{book.id}" %>>
-  <a href=<%= book_path(book) %>><%= book.title %></a>
+  <%= link_to book.title, book_path(book) %>
   <% @author.co_authors(book).each do |coauthor| %>
-    <a href=<%= author_path(coauthor) %>><%= coauthor.name %></a>
+    <%= link_to coauthor.name, author_path(coauthor) %>
   <% end %>
   <p>Publication Year: <%= book.published %></p>
   <p>Page Count: <%= book.pages %></p>

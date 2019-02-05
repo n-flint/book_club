@@ -9,24 +9,24 @@
 
 <section class="book-stats">
   <section id="best-books">
-    <h3>3 Highest Rated Books</h3>
+    <h3>Highest Rated Books</h3>
     <% @books.best.each do |book| %>
-      <p><%= book.title %>
-      Rating: <%= book.average_score unless book.reviews == [] %></p>
+      <%= link_to book.title, book_path(book) %>
+      Rating: <%= book.average_score unless book.reviews == [] %>
     <% end %>
   </section>
   <section id="worst-books">
-    <h3>3 Lowest Rated Books</h3>
+    <h3>Lowest Rated Books</h3>
     <% @books.worst.each do |book| %>
-    <p><%= book.title %>
-      Rating: <%= book.average_score unless book.reviews == [] %></p>
+    <%= link_to book.title, book_path(book) %>
+      Rating: <%= book.average_score unless book.reviews == [] %>
     <% end %>
   </section>
   <section id="top-users">
     <h3>Most Reviews By:</h3>
     <% @top_users.each do |user| %>
-      <p><%= user.name %>
-      Review Count: <%= user.review_count %></p>
+      <%= link_to user.name, user_path(user) %>
+      Review Count: <%= user.review_count %>
     <% end %>
   </section>
 </section>
@@ -46,10 +46,12 @@
 <ul>
   <% @books.each do |book| %>
   <li class='book' id=<%= "book-#{book.id}" %>>
-    <h3><%= book.title %></h3>
+    <h3><%= link_to book.title, book_path(book) %></h3>
     <img src=<%= book.cover %> alt="book cover">
     <div class='book-info'>
-      <p><%= book.author_names %></p>
+      <% book.authors.each do |author| %>
+        <%= link_to author.name, author_path(author) %>
+      <% end %>
       <p>Page Count: <%= book.pages %></p>
       <p>Publication Year: <%= book.published %></p>
       <% if book.reviews.count > 0 %>
