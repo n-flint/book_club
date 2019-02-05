@@ -62,7 +62,6 @@ RSpec.describe 'when visitor visits book index', type: :feature do
   it 'sees a nav bar' do
 
     visit books_path
-    save_and_open_page
 
     expect(page).to have_link("Home")
     expect(page).to have_link("Add Book")
@@ -127,13 +126,14 @@ RSpec.describe 'when visitor visits book index', type: :feature do
     end
   end
 
-  it 'sees an average review for each book' do
+  it 'sees a count and an average for reviews for each book' do
 
     visit books_path
 
     within "#book-#{@book_1.id}" do
       within ".book-info" do
         expect(page).to have_content("Average Rating: #{@book_1.average_score}")
+        expect(page).to have_content("Review Count: #{@book_1.review_count}")
 
         expect(page).to_not have_content("Average Rating: #{@book_2.average_score}")
       end
@@ -142,6 +142,7 @@ RSpec.describe 'when visitor visits book index', type: :feature do
     within "#book-#{@book_2.id}" do
       within ".book-info" do
         expect(page).to have_content("Average Rating: #{@book_2.average_score}")
+        expect(page).to have_content("Review Count: #{@book_2.review_count}")
 
         expect(page).to_not have_content("Average Rating: #{@book_1.average_score}")
       end

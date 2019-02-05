@@ -1,3 +1,12 @@
+<header>
+  <h1><%= @book.title %></h1>
+</header>
+
+<nav>
+  <%= link_to 'Home', root_path %>
+  <%= link_to 'Browse Books', books_path %>
+</nav>
+
 <% if @book.reviews != [] %>
   <section id="best-reviews">
     <h4>Best 3 Reviews</h4>
@@ -23,12 +32,13 @@
   </section>
 <% end %>
 
-<h1><%= @book.title %></h1>
 <p>Author(s): <%= @book.author_names %></p>
 <p>Page Count: <%= @book.pages %></p>
 <p>Publication Date: <%= @book.published %></p>
 <img src=<%= @book.cover %> alt="book cover">
+
 <a href=<%= new_book_review_path(@book) %>>Add Review</a>
+
 <h3>Reviews</h3>
 <% @book.reviews.each do |review| %>
 <h5><%= review.title %></h5>
@@ -36,3 +46,5 @@
 <p>Rating: <%= review.rating %></p>
 <p><%= review.review %></p>
 <% end %>
+
+<%= button_to "Delete Book", book_path(@book), method: :delete %>

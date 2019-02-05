@@ -132,4 +132,13 @@ RSpec.describe 'when visitor visits new book page', type: :feature do
     expect(page).to have_content("Noah Flint")
   end
 
+  it 'sees a nav bar' do
+
+    visit new_book_path
+
+    expect(page).to have_link("Home")
+    expect(page).to have_link("Browse Books")
+
+  end
+
 end

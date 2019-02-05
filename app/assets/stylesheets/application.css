@@ -13,9 +13,14 @@
  *= require_tree .
  *= require_self
  */
+
  body {
    background: #E0DDCF;
    margin: 0px;
+ }
+
+ nav {
+   height: 5vh;
  }
 
  header {
@@ -33,7 +38,7 @@
  } */
 
  div {
-   height: 3vh;
+   height: 7vh;
  }
 
  ul {
@@ -59,7 +64,7 @@
 
  .book-stats {
    display: flex;
-   height: 27vh;
+   height: 18vh;
  }
 
  .book-info {
