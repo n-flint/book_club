@@ -11,35 +11,35 @@
   <section id="best-books">
     <h3>Highest Rated Books</h3>
     <% @books.best.each do |book| %>
-      <%= link_to book.title, book_path(book) %>
-      Rating: <%= book.average_score unless book.reviews == [] %>
+      <p><%= link_to book.title, book_path(book) %></p>
+      <p>Rating: <%= book.average_score unless book.reviews == [] %></p>
     <% end %>
   </section>
   <section id="worst-books">
     <h3>Lowest Rated Books</h3>
     <% @books.worst.each do |book| %>
-    <%= link_to book.title, book_path(book) %>
-      Rating: <%= book.average_score unless book.reviews == [] %>
+      <p><%= link_to book.title, book_path(book) %></p>
+      <p>Rating: <%= book.average_score unless book.reviews == [] %></p>
     <% end %>
   </section>
   <section id="top-users">
     <h3>Most Reviews By:</h3>
     <% @top_users.each do |user| %>
-      <%= link_to user.name, user_path(user) %>
-      Review Count: <%= user.review_count %>
+      <p><%= link_to user.name, user_path(user) %></p>
+      <p>Review Count: <%= user.review_count %></p>
     <% end %>
   </section>
 </section>
 
 <div>
   <div class='sort-styles'>
-    <p>Sort By:</p>
-    <%= link_to 'average rating (highest to lowest)', books_path(sort: 'avg rating desc') %>
-    <%= link_to 'average rating (lowest to highest)', books_path(sort: 'avg rating asc') %>
-    <%= link_to 'page count (highest to lowest)', books_path(sort: 'pages desc') %>
-    <%= link_to 'page count (lowest to highest)', books_path(sort: 'pages asc') %>
-    <%= link_to 'number of reviews (highest to lowest)', books_path(sort: 'reviews desc') %>
-    <%= link_to 'number of reviews (lowest to highest)', books_path(sort: 'reviews asc') %>
+    <a>Sort By:</a>
+    <%= link_to 'high to low ratings', books_path(sort: 'avg rating desc') %>
+    <%= link_to 'low to high ratings', books_path(sort: 'avg rating asc') %>
+    <%= link_to 'most pages', books_path(sort: 'pages desc') %>
+    <%= link_to 'fewest pages', books_path(sort: 'pages asc') %>
+    <%= link_to 'most reviews', books_path(sort: 'reviews desc') %>
+    <%= link_to 'least reviews', books_path(sort: 'reviews asc') %>
   </div>
 
 </div>
