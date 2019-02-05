@@ -38,7 +38,7 @@
  } */
 
  div {
-   height: 7vh;
+   height: 4vh;
  }
 
  ul {
@@ -62,11 +62,32 @@
    width: 12rem;
  }
 
+ a {
+   padding-left: 3rem;
+ }
+
  .book-stats {
    display: flex;
-   height: 18vh;
+   height: 21vh;
+   padding-left: 5vw;
+   padding-right: 5vw;
  }
 
  .book-info {
    display: inline;
+ }
+
+ #best-books {
+  width: 30vw;
+  justify-content: center;
+ }
+
+ #worst-books {
+  width: 30vw;
+  justify-content: center;
+ }
+
+ #top-users {
+  width: 30vw;
+  justify-content: center;
  }
