@@ -1,4 +1,13 @@
-<h2>Add Book</h2>
+
+<header>
+  <h2>Add Book</h2>
+</header>
+
+<nav>
+  <%= link_to 'Home', root_path %>
+  <%= link_to 'Browse Books', books_path %>
+</nav>
+
 
 <%= form_for @book do |f| %>
 <%= f.label :title %>

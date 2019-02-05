@@ -18,11 +18,33 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.all
+    if params[:sort] == 'avg rating desc'
+      @books = Book.order(average_rating: :desc)
+    elsif params[:sort] == 'avg rating asc'
+      @books = Book.order(average_rating: :asc)
+    elsif params[:sort] == 'pages desc'
+      @books = Book.order(pages: :desc)
+    elsif params[:sort] == 'pages asc'
+      @books = Book.order(pages: :asc)
+    elsif params[:sort] == 'reviews desc'
+      # @books = Book.sort_by_most_reviews
+      @books = Book.select('books.*, count(reviews.id) as count_reviews').left_outer_joins(:reviews).group(:id).order('count_reviews desc').order(:id)
+    elsif params[:sort] == 'reviews asc'
+      @books = Book.select('books.*, count(reviews.id) as count_reviews').left_outer_joins(:reviews).group(:id).order('count_reviews asc')
+    else
+      @books = Book.all
+    end
+    @top_users = User.most_reviews
   end
 
   def show
     @book = Book.find(params[:id])
+  end
+
+  def destroy
+    @book = Book.find(params[:id])
+    @book.destroy
+    redirect_to books_path
   end
 
   private

@@ -1,4 +1,12 @@
-<h2>Add Review for <%= @book.title %></h2>
+<header>
+</header>
+
+<nav>
+  <%= link_to 'Home', root_path %>
+  <%= link_to 'Browse Books', books_path %>
+</nav>
+
+<h2>Add Review for <%= link_to @book.title, book_path(@book) %></h2>
 
 <img src=<%= @book.cover %> alt="book cover">
 

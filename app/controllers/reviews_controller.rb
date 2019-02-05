@@ -17,9 +17,16 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def destroy
+    review = Review.find(params[:id])
+    review.destroy
+    redirect_to user_path(review.user_id)
+  end
+
   private
   def review_params
     parameters = params.require(:review).permit(:title, :user_id, :rating, :review)
+    params[:review][:user] = params[:review][:user].titleize
     @user = User.find_or_create_by(name: params[:review][:user])
     parameters[:user] = @user
     parameters

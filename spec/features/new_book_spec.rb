@@ -127,9 +127,53 @@ RSpec.describe 'when visitor visits new book page', type: :feature do
 
     click_button "Add Book"
 
-    #TODO change have_content to have_link
-    expect(page).to have_content("Tim Allen")
-    expect(page).to have_content("Noah Flint")
+    expect(page).to have_link("Tim Allen")
+    expect(page).to have_link("Noah Flint")
   end
+
+  it 'clicks author name link and goes to that authors show page' do
+
+    visit new_book_path
+
+    fill_in "book_title", with: "Dog Wizards"
+    fill_in "book_authors", with: "tim allen, noah flint"
+    fill_in "book_pages", with: 320
+    fill_in "book_published", with: 2019
+
+    click_button "Add Book"
+
+    click_link("Tim Allen")
+
+    author = Author.find_by(name: "Tim Allen")
+    expect(current_path).to eq(author_path(author))
+  end
+
+  it 'sees a nav bar' do
+
+    visit new_book_path
+
+    expect(page).to have_link("Home")
+    expect(page).to have_link("Browse Books")
+
+  end
+
+  it 'goes to the home book page when link is pressed' do
+
+    visit new_book_path
+
+    click_link("Home")
+
+    expect(current_path).to eq(root_path)
+  end
+
+  it 'goes to the book index page when link is pressed' do
+
+    visit new_book_path
+
+    click_link("Browse Books")
+
+    expect(current_path).to eq(books_path)
+  end
+
 
 end

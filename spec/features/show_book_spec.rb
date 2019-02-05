@@ -2,6 +2,18 @@ require 'rails_helper'
 
 RSpec.describe 'when visitor visits show book', type: :feature do
 
+  #
+  #
+  #
+  #
+  #
+  # TODO test for stats
+  #
+  #
+  #
+  #
+  #
+
   before :each do
     @cover_1 = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd3cgsv8lMoNU4g8dDN1hUqKlXAR3DTITUd5rl1tMuYds_wAP6"
     @cover_2 = "https://static.seibertron.com/images/toys/uploads/1542829964-unicron-retailer-incentive-nick-roache.jpg"
@@ -33,16 +45,16 @@ RSpec.describe 'when visitor visits show book', type: :feature do
     visit book_path(@book_1)
 
     expect(page).to have_content("#{@book_1.title}")
-    expect(page).to have_content("Author(s): Peregrine")
+    expect(page).to have_content("Author(s): #{@book_1.authors.first.name}")
     expect(page).to have_content("Page Count: #{@book_1.pages}")
     expect(page).to have_content("Publication Date: #{@book_1.published}")
-    expect(page).to have_css("img[src*='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd3cgsv8lMoNU4g8dDN1hUqKlXAR3DTITUd5rl1tMuYds_wAP6']")
+    expect(page).to have_css("img[src*='#{@book_1.cover}']")
 
     expect(page).to_not have_content("#{@book_2.title}")
-    expect(page).to_not have_content("Author(s): Noah")
+    expect(page).to_not have_content("Author(s): #{@book_2.authors.first.name}")
     expect(page).to_not have_content("Page Count: #{@book_2.pages}")
     expect(page).to_not have_content("Publication Date: #{@book_2.published}")
-    expect(page).to_not have_css("img[src*='https://static.seibertron.com/images/toys/uploads/1542829964-unicron-retailer-incentive-nick-roache.jpg']")
+    expect(page).to_not have_css("img[src*='#{@book_2.cover}']")
   end
 
   it 'can see a link to add a review' do
@@ -73,8 +85,12 @@ RSpec.describe 'when visitor visits show book', type: :feature do
 
     visit book_path(@book_1)
 
+    # expect(page.all('.merchant')[0]).to have_content('Merchant Name 2, Revenue: $90,000')
+    # expect(page.all('.merchant')[1]).to have_content('Merchant Name 3, Revenue: $80,200')
+    # expect(page.all('.merchant')[2]).to have_content('Merchant Name 1, Revenue: $10,000')
+    
     within '#best-reviews' do
-      expect(page).to have_content("Best 3 Reviews")
+      expect(page).to have_content("Best Reviews")
       expect(page).to have_content("Title: #{@book_1.best_reviews.first.title}")
       expect(page).to have_content("Rating: #{@book_1.best_reviews.first.rating}")
       expect(page).to have_content("Reviewer: #{@book_1.best_reviews.first.user.name}")
@@ -89,7 +105,7 @@ RSpec.describe 'when visitor visits show book', type: :feature do
     end
 
     within '#worst-reviews' do
-      expect(page).to have_content("Worst 3 Reviews")
+      expect(page).to have_content("Worst Reviews")
       expect(page).to have_content("Title: #{@book_1.worst_reviews.first.title}")
       expect(page).to have_content("Rating: #{@book_1.worst_reviews.first.rating}")
       expect(page).to have_content("Reviewer: #{@book_1.worst_reviews.first.user.name}")
@@ -107,5 +123,26 @@ RSpec.describe 'when visitor visits show book', type: :feature do
       expect(page).to have_content("Average Review Score")
       expect(page).to have_content(@book_1.average_score)
     end
+
+  end
+
+  it 'sees a nav bar' do
+
+    visit book_path(@book_1)
+
+    expect(page).to have_link("Home")
+    expect(page).to have_link("Browse Books")
+
+  end
+
+  it 'sees a button to delete book' do
+
+    visit book_path(@book_1)
+
+    expect(page).to have_button('Delete Book')
+    click_button('Delete Book')
+    expect(current_path).to eq(books_path)
+    expect(@book_1).to_not eq(nil)
+
   end
 end
