@@ -13,7 +13,6 @@ RSpec.describe 'when visitor visits user show page', type: :feature do
     review_3 = create(:review, user_id: user_2.id, book_id: book_3.id)
 
     visit user_path(user_1)
-    save_and_open_page
 
     expect(page).to have_content("#{user_1.name}")
     expect(page).to have_content("Title: #{review_1.title}")
@@ -22,7 +21,8 @@ RSpec.describe 'when visitor visits user show page', type: :feature do
     expect(page).to have_content("Book Title: #{review_1.book.title}")
     expect(page).to have_css("img[src*='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd3cgsv8lMoNU4g8dDN1hUqKlXAR3DTITUd5rl1tMuYds_wAP6']")
     expect(page).to have_content("Date Reviewed: #{review_1.created_at.to_date.to_s}")
-    expect(page).to have_no_content("#{user_2.name}")
+    expect(page).to have_content("Title: #{review_2.title}")
+    expect(page).to have_no_content("Title: #{review_3.title}")
   end
 
 
