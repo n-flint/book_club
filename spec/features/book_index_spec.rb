@@ -64,7 +64,6 @@ RSpec.describe 'when visitor visits book index', type: :feature do
     visit books_path
 
     expect(page).to have_link("Home")
-    expect(page).to have_link("Add Book")
   end
   it 'goes to the add book page when link is pressed' do
 
@@ -149,7 +148,6 @@ RSpec.describe 'when visitor visits book index', type: :feature do
         expect(page).to_not have_content("Average Rating: #{@book_1.average_score}")
       end
     end
-
   end
 
   it 'sees links to sort books' do
@@ -165,7 +163,5 @@ RSpec.describe 'when visitor visits book index', type: :feature do
       expect(page).to have_link('number of reviews (lowest to highest)')
       expect(page).to have_link('number of reviews (highest to lowest)')
     end
-
   end
-
 end
