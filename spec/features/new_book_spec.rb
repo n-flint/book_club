@@ -132,4 +132,14 @@ RSpec.describe 'when visitor visits new book page', type: :feature do
     expect(page).to have_content("Noah Flint")
   end
 
+  it 'goes to the home book page when link is pressed' do
+
+    visit new_book_path
+
+    click_link("Home")
+
+    expect(current_path).to eq(root_path)
+
+  end
+
 end
