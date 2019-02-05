@@ -157,12 +157,12 @@ RSpec.describe 'when visitor visits book index', type: :feature do
 
     within ".sort-styles" do
       expect(page).to have_content("Sort By:")
-      expect(page).to have_link('average rating (highest to lowest)')
-      expect(page).to have_link('average rating (lowest to highest)')
-      expect(page).to have_link('page count (lowest to highest)')
-      expect(page).to have_link('page count (highest to lowest)')
-      expect(page).to have_link('number of reviews (lowest to highest)')
-      expect(page).to have_link('number of reviews (highest to lowest)')
+      expect(page).to have_link('high to low ratings')
+      expect(page).to have_link('low to high ratings')
+      expect(page).to have_link('most pages')
+      expect(page).to have_link('fewest pages')
+      expect(page).to have_link('most reviews')
+      expect(page).to have_link('least reviews')
     end
 
   end
