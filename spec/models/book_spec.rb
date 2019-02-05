@@ -21,6 +21,12 @@ describe Book, type: :model do
     @review_5 = @book_1.reviews.create(title: "An OKish Read", user_id: @user_2.id, rating: 2, review: "Probably leave it")
     @review_6 = @book_1.reviews.create(title: "BOO", user_id: @user_1.id, rating: 1, review: "I died inside")
     @review_7 = @book_1.reviews.create(title: "Awful", user_id: @user_2.id, rating: 1, review: "Leave it!")
+    @review_8 = create(:review, user_id: @user_1.id, book_id: @book_3.id)
+    @review_9 = create(:review, user_id: @user_1.id, book_id: @book_3.id)
+    @review_10 = create(:review, user_id: @user_1.id, book_id: @book_4.id)
+    @review_11 = create(:review, user_id: @user_1.id, book_id: @book_5.id)
+    @review_12 = create(:review, user_id: @user_1.id, book_id: @book_5.id)
+    @review_13 = create(:review, user_id: @user_1.id, book_id: @book_5.id)
   end
 
   describe "relationships" do
@@ -53,14 +59,23 @@ describe Book, type: :model do
 
     end
 
-    # it '.sort_by_most_reviews' do
-    #
-    #   expected =
-    #   actual = Book.sort_by_most_reviews
-    #
-    #   expect(actual).to eq(expected)
-    #
-    # end
+    it '.most_reviews' do
+
+      expected = [@book_1, @book_5, @book_3, @book_4]
+      actual = Book.most_reviews
+
+      expect(actual).to eq(expected)
+
+    end
+
+    it '.least_reviews' do
+
+      expected = [@book_4, @book_3, @book_5, @book_1]
+      actual = Book.least_reviews
+
+      expect(actual).to eq(expected)
+
+    end
 
   end
 
