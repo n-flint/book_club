@@ -9,11 +9,6 @@
   </head>
 
   <body>
-    <nav>
-      <% @nav_bar.each do |link| %>
-      <a href=<%= link %>></a>
-      <% end %>
-    </nav>
     <%= yield %>
   </body>
 </html>

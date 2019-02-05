@@ -38,7 +38,7 @@
  } */
 
  div {
-   height: 3vh;
+   height: 7vh;
  }
 
  ul {
@@ -64,7 +64,7 @@
 
  .book-stats {
    display: flex;
-   height: 22vh;
+   height: 18vh;
  }
 
  .book-info {

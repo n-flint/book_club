@@ -18,7 +18,6 @@ class BooksController < ApplicationController
   end
 
   def index
-    @nav_bar = [root_path, new_book_path]
     if params[:sort] == 'avg rating desc'
       @books = Book.order(average_rating: :desc)
     elsif params[:sort] == 'avg rating asc'
