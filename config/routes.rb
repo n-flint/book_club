@@ -6,9 +6,10 @@ Rails.application.routes.draw do
   #what does shallow: true do?
   resources :books, shallow: true, except: [:update, :edit] do
     resources :reviews, only: [:create, :new, :destroy]
-    resources :authors, only: :show
+
   end
   resources :users, only: :show
   resources :reviews, only: :destroy
+  resources :authors, only: [:show, :destroy]
 
 end
