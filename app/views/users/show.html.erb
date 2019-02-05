@@ -6,7 +6,8 @@
 <h1> <%= @user.name %> </h1>
 <% @user.reviews.each do |review| %>
 <section id=<%= "review-#{review.id}" %>>
-  <%= button_to "X", user_path(@user.id, review: review.id), method: :delete %>
+  <!-- <%= button_to "X", user_path(@user.id, review: review.id), controller: :reviews, method: :delete %> -->
+  <%= button_to "X", review_path(review.id), method: :delete %>
   <h3>Title: <%= review.title%></h3>
   <p>Book Title: <%= review.book.title%></p>
   <p><%= review.review%></p>

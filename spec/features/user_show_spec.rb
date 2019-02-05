@@ -67,6 +67,7 @@ RSpec.describe 'when visitor visits user show page', type: :feature do
       expect(page).to have_button("X")
       click_button("X")
     end
+
     expect(current_path).to eq(user_path(@user_1.id))
     expect(page).to_not have_content("Title: #{@review_1.title}")
     expect(page).to have_content("Title: #{@review_2.title}")
