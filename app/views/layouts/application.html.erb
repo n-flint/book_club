@@ -7,13 +7,6 @@
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
   </head>
-
-  <nav>
-    <% @nav_bar.each do |link| %>
-      <a href=<%= link %>></a>
-    <% end %>
-  </nav>
-
   <body>
     <%= yield %>
   </body>
