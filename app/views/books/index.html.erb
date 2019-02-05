@@ -41,7 +41,6 @@
     <%= link_to 'number of reviews (highest to lowest)', books_path(sort: 'reviews desc') %>
     <%= link_to 'number of reviews (lowest to highest)', books_path(sort: 'reviews asc') %>
   </div>
-  <a href=<%= new_book_path %>>Add Book</a>
 </div>
 <ul>
   <% @books.each do |book| %>
