@@ -75,7 +75,8 @@ RSpec.describe 'when visitor visits book index', type: :feature do
     expect(current_path).to eq(new_book_path)
 
   end
-  it 'goes to the home book page when link is pressed' do
+
+  xit 'goes to the home book page when link is pressed' do
 
     visit books_path
 
@@ -150,7 +151,7 @@ RSpec.describe 'when visitor visits book index', type: :feature do
 
   end
 
-  it 'sees links to sort books' do
+  xit 'sees links to sort books' do
 
     visit books_path
 

@@ -157,4 +157,23 @@ RSpec.describe 'when visitor visits new book page', type: :feature do
 
   end
 
+  it 'goes to the home book page when link is pressed' do
+
+    visit new_book_path
+
+    click_link("Home")
+
+    expect(current_path).to eq(root_path)
+  end
+
+  it 'goes to the book index page when link is pressed' do
+
+    visit new_book_path
+
+    click_link("Browse Books")
+
+    expect(current_path).to eq(books_path)
+  end
+
+
 end
