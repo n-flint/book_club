@@ -7,11 +7,13 @@ class Book < ApplicationRecord
   has_many :reviews, dependent: :destroy
 
   def self.best
-    order(average_rating: :desc).limit(3)
+    # order(average_rating: :desc).limit(3)
+    select("books.*, AVG(reviews.rating) AS avg_rating").left_outer_joins(:reviews).group(:id).order("average_rating desc").order(:id).limit(3)
   end
 
   def self.worst
-    order(average_rating: :asc).limit(3)
+    # order(average_rating: :asc).limit(3)
+    select("books.*, AVG(reviews.rating) AS avg_rating").left_outer_joins(:reviews).group(:id).order("average_rating asc").order(:id).limit(3)
   end
 
   def self.most_reviews

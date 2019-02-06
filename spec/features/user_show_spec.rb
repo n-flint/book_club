@@ -9,8 +9,8 @@ RSpec.describe 'when visitor visits user show page', type: :feature do
     @book_2 = create(:book)
     @book_3 = create(:book)
     @review_1 = create(:review, user_id: @user_1.id, book_id: @book_1.id)
-    @review_2 = create(:review, user_id: @user_1.id, book_id: @book_2.id)
-    @review_3 = create(:review, user_id: @user_2.id, book_id: @book_3.id)
+    @review_2 = create(:review, user_id: @user_1.id, book_id: @book_2.id, created_at: 2019-03-05)
+    @review_3 = create(:review, user_id: @user_2.id, book_id: @book_3.id, created_at: 2019-04-05)
   end
 
   it 'sees a nav bar' do
@@ -70,7 +70,7 @@ RSpec.describe 'when visitor visits user show page', type: :feature do
   it "link to sort reviews by date oldest to newest" do
 
     visit user_path(@user_1.id)
-    
+
     expect(page).to have_link("Oldest To Newest")
     click_link("Oldest To Newest")
 
@@ -81,4 +81,16 @@ RSpec.describe 'when visitor visits user show page', type: :feature do
     expect(current_path).to eq(user_path(@user_1.id,))
   end
 
+  it "button to delete single review" do
+
+  visit user_path(@user_1.id)
+
+  within "#review-#{@review_1.id}" do
+    expect(page).to have_button("X")
+    click_button("X")
+  end
+  expect(current_path).to eq(user_path(@user_1.id))
+  expect(page).to_not have_content("Title: #{@review_1.title}")
+  expect(page).to have_content("Title: #{@review_2.title}")
+end
 end
