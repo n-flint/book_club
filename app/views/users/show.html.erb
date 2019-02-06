@@ -5,7 +5,8 @@
 
 <h1> <%= @user.name %> </h1>
 <section id= "Sort Reviews">
-  <%= link_to 'Newest to Oldest', user_path(@user, sort: "n_to_o")%>
+  <%= link_to 'Newest To Oldest', user_path(@user, sort: "n_to_o")%>
+  <%= link_to 'Oldest To Newest', user_path(@user, sort: "o_to_n")%>
 </section>
 <% @user.reviews.each do |review| %>
 <section class="single-review" id=<%= "review-#{review.id}" %>>
