@@ -4,10 +4,11 @@
 </nav>
 
 <h1> <%= @user.name %> </h1>
+<section id= "Sort Reviews">
+  <%= link_to 'Newest to Oldest', user_path(@user, sort: "n_to_o")%>
+</section>
 <% @user.reviews.each do |review| %>
-
-<section id=<%= "review-#{review.id}" %>>
-  <!-- <%= button_to "X", user_path(@user.id, review: review.id), controller: :reviews, method: :delete %> -->
+<section class="single-review" id=<%= "review-#{review.id}" %>>
   <%= button_to "X", review_path(review.id), method: :delete %>
   <h3>Title: <%= review.title%></h3>
   <p>Book Title: <%= review.book.title%></p>
@@ -16,5 +17,4 @@
   <p>Date Reviewed: <%= review.created_at.to_date.to_s %></p>
   <img src=<%= review.book.cover %> alt="book cover">
 </section>
-
 <% end %>
