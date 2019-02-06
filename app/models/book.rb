@@ -19,7 +19,7 @@ class Book < ApplicationRecord
   end
 
   def self.least_reviews
-    select('books.*, count(reviews.id) as count_reviews').left_outer_joins(:reviews).group(:id).order('count_reviews asc').order(:id)
+    select('books.*, count(reviews.id) as count_reviews').left_outer_joins(:reviews).group(:id).order('count_reviews asc')
   end
 
   def author_names
