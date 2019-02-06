@@ -65,6 +65,7 @@ RSpec.describe 'when visitor visits book index', type: :feature do
 
     expect(page).to have_link("Home")
   end
+  
   it 'goes to the add book page when link is pressed' do
 
     visit books_path
