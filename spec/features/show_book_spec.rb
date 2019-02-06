@@ -73,6 +73,10 @@ RSpec.describe 'when visitor visits show book', type: :feature do
 
     visit book_path(@book_1)
 
+    # expect(page.all('.merchant')[0]).to have_content('Merchant Name 2, Revenue: $90,000')
+    # expect(page.all('.merchant')[1]).to have_content('Merchant Name 3, Revenue: $80,200')
+    # expect(page.all('.merchant')[2]).to have_content('Merchant Name 1, Revenue: $10,000')
+
     within '#best-reviews' do
       expect(page).to have_content("Best Reviews")
       expect(page).to have_content("Title: #{@book_1.best_reviews.first.title}")
@@ -126,7 +130,7 @@ RSpec.describe 'when visitor visits show book', type: :feature do
     expect(page).to have_button('Delete Book')
     click_button('Delete Book')
     expect(current_path).to eq(books_path)
-    expect(@book_1).to_not eq(nil)
+    expect(page).to_not have_content(@book_1.title)
 
   end
 end

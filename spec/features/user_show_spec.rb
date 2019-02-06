@@ -17,9 +17,6 @@ RSpec.describe 'when visitor visits user show page', type: :feature do
 
     visit user_path(@user_1.id)
 
-
-
-
     expect(page).to have_link("Home")
     expect(page).to have_link("Browse Books")
   end

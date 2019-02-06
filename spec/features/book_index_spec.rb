@@ -11,9 +11,9 @@ RSpec.describe 'when visitor visits book index', type: :feature do
     @book_2.authors.create(name: "Noah")
     @book_3 = Book.create(title: "Killing Time", pages: 105, published: 1992, cover: @cover_1, average_rating: 5.0)
     @book_3.authors.create(name: "Peregrine")
-    @book_4 = Book.create(title: "Testing Books", pages: 200, published: 2010, cover: @cover_1, average_rating: 2.5)
+    @book_4 = Book.create(title: "Testing Books", pages: 201, published: 2010, cover: @cover_1, average_rating: 2.5)
     @book_4.authors.create(name: "Peregrine")
-    @book_5 = Book.create(title: "What's UP? You Know, You Know", pages: 1, published: 2019, cover: @cover_1, average_rating: 4.0)
+    @book_5 = Book.create(title: "What's UP? You Know, You Know", pages: 2, published: 2019, cover: @cover_1, average_rating: 4.0)
     @book_5.authors.create(name: "Peregrine")
     @books = Book.all
 
@@ -29,14 +29,14 @@ RSpec.describe 'when visitor visits book index', type: :feature do
     @review_1 = @book_1.reviews.create(title: "Best book ever", user_id: @user_1.id, rating: 5, review: "A must read")
     @review_2 = @book_1.reviews.create(title: "Goody bookie", user_id: @user_2.id, rating: 4, review: "Good good")
     @review_3 = @book_2.reviews.create(title: "New Favorite book ever", user_id: @user_3.id, rating: 5, review: "A tour de force")
-    @review_4 = @book_1.reviews.create(title: "Kinda sorta", user_id: @user_4.id, rating: 3, review: "Eh")
-    @review_5 = @book_1.reviews.create(title: "An OKish Read", user_id: @user_5.id, rating: 2, review: "Probably leave it")
+    @review_4 = @book_2.reviews.create(title: "Kinda sorta", user_id: @user_4.id, rating: 3, review: "Eh")
+    @review_5 = @book_3.reviews.create(title: "An OKish Read", user_id: @user_5.id, rating: 2, review: "Probably leave it")
     @review_6 = @book_1.reviews.create(title: "BOO", user_id: @user_6.id, rating: 1, review: "I died inside")
     @review_7 = @book_1.reviews.create(title: "Awful", user_id: @user_7.id, rating: 1, review: "Leave it!")
     @review_8 = @book_3.reviews.create(title: "Best book ever", user_id: @user_1.id, rating: 5, review: "A must read")
     @review_9 = @book_3.reviews.create(title: "Goody bookie", user_id: @user_2.id, rating: 5, review: "Good good")
     @review_10 = @book_4.reviews.create(title: "Kinda sorta", user_id: @user_1.id, rating: 3, review: "Eh")
-    @review_11 = @book_4.reviews.create(title: "An OKish Read", user_id: @user_2.id, rating: 2, review: "Probably leave it")
+    @review_11 = @book_5.reviews.create(title: "An OKish Read", user_id: @user_2.id, rating: 2, review: "Probably leave it")
     @review_12 = @book_5.reviews.create(title: "BOO", user_id: @user_1.id, rating: 4, review: "I died inside")
     @review_13 = @book_5.reviews.create(title: "Awful", user_id: @user_2.id, rating: 4, review: "Leave it!")
   end
@@ -93,25 +93,25 @@ RSpec.describe 'when visitor visits book index', type: :feature do
     within '#best-books' do
       expect(page).to have_content("Highest Rated Books")
       expect(page).to have_content(@books.best.first.title)
-      expect(page).to have_content("Rating: #{@books.best.first.average_rating}")
+      expect(page).to have_content("Rating: #{@books.best.first.average_score}")
 
       expect(page).to have_content(@books.best.second.title)
-      expect(page).to have_content("Rating: #{@books.best.second.average_rating}")
+      expect(page).to have_content("Rating: #{@books.best.second.average_score}")
 
       expect(page).to have_content(@books.best.third.title)
-      expect(page).to have_content("Rating: #{@books.best.third.average_rating}")
+      expect(page).to have_content("Rating: #{@books.best.third.average_score}")
     end
 
     within '#worst-books' do
       expect(page).to have_content("Lowest Rated Books")
       expect(page).to have_content(@books.worst.first.title)
-      expect(page).to have_content("Rating: #{@books.worst.first.average_rating}")
+      expect(page).to have_content("Rating: #{@books.worst.first.average_score}")
 
       expect(page).to have_content(@books.worst.second.title)
-      expect(page).to have_content("Rating: #{@books.worst.second.average_rating}")
+      expect(page).to have_content("Rating: #{@books.worst.second.average_score}")
 
       expect(page).to have_content(@books.worst.third.title)
-      expect(page).to have_content("Rating: #{@books.worst.third.average_rating}")
+      expect(page).to have_content("Rating: #{@books.worst.third.average_score}")
     end
 
     within '#top-users' do
@@ -156,12 +156,81 @@ RSpec.describe 'when visitor visits book index', type: :feature do
 
     within ".sort-styles" do
       expect(page).to have_content("Sort By:")
-      expect(page).to have_link('average rating (highest to lowest)')
-      expect(page).to have_link('average rating (lowest to highest)')
-      expect(page).to have_link('page count (lowest to highest)')
-      expect(page).to have_link('page count (highest to lowest)')
-      expect(page).to have_link('number of reviews (lowest to highest)')
-      expect(page).to have_link('number of reviews (highest to lowest)')
+      expect(page).to have_link('high to low ratings')
+      expect(page).to have_link('low to high ratings')
+      expect(page).to have_link('most pages')
+      expect(page).to have_link('fewest pages')
+      expect(page).to have_link('most reviews')
+      expect(page).to have_link('least reviews')
     end
   end
+
+  it 'sorts books when clicking links to sort' do
+
+    visit books_path
+
+    # expect(page.all('.merchant')[0]).to have_content('Merchant Name 2, Revenue: $90,000')
+    # expect(page.all('.merchant')[1]).to have_content('Merchant Name 3, Revenue: $80,200')
+    # expect(page.all('.merchant')[2]).to have_content('Merchant Name 1, Revenue: $10,000')
+    click_link('high to low ratings')
+
+    within ".books" do
+      expect(page.all('.book')[0]).to have_content("What's New Pussy Cat")
+      expect(page.all('.book')[1]).to have_content("Killing Time")
+      expect(page.all('.book')[2]).to have_content("What's UP? You Know, You Know")
+      expect(page.all('.book')[3]).to have_content("100 Pictures Of Spiders")
+      expect(page.all('.book')[4]).to have_content("Testing Books")
+    end
+
+    click_link('low to high ratings')
+
+    within ".books" do
+      expect(page.all('.book')[0]).to have_content("Testing Books")
+      expect(page.all('.book')[1]).to have_content("100 Pictures Of Spiders")
+      expect(page.all('.book')[2]).to have_content("What's UP? You Know, You Know")
+      expect(page.all('.book')[3]).to have_content("What's New Pussy Cat")
+      expect(page.all('.book')[4]).to have_content("Killing Time")
+    end
+
+    click_link('most pages')
+
+    within ".books" do
+      expect(page.all('.book')[0]).to have_content("Testing Books")
+      expect(page.all('.book')[1]).to have_content("What's New Pussy Cat")
+      expect(page.all('.book')[2]).to have_content("Killing Time")
+      expect(page.all('.book')[3]).to have_content("100 Pictures Of Spiders")
+      expect(page.all('.book')[4]).to have_content("What's UP? You Know, You Know")
+    end
+
+    click_link('fewest pages')
+
+    within ".books" do
+      expect(page.all('.book')[0]).to have_content("What's UP? You Know, You Know")
+      expect(page.all('.book')[1]).to have_content("100 Pictures Of Spiders")
+      expect(page.all('.book')[2]).to have_content("Killing Time")
+      expect(page.all('.book')[3]).to have_content("What's New Pussy Cat")
+      expect(page.all('.book')[4]).to have_content("Testing Books")
+    end
+
+    click_link('most reviews')
+
+    within ".books" do
+      expect(page.all('.book')[0]).to have_content("100 Pictures Of Spiders")
+      expect(page.all('.book')[1]).to have_content("Killing Time")
+      expect(page.all('.book')[2]).to have_content("What's UP? You Know, You Know")
+      expect(page.all('.book')[3]).to have_content("What's New Pussy Cat")
+      expect(page.all('.book')[4]).to have_content("Testing Books")
+    end
+
+    click_link('least reviews')
+
+    within ".books" do
+      expect(page.all('.book')[0]).to have_content("Testing Books")
+      expect(page.all('.book')[1]).to have_content("What's New Pussy Cat")
+      expect(page.all('.book')[2]).to have_content("Killing Time")
+      expect(page.all('.book')[3]).to have_content("What's UP? You Know, You Know")
+      expect(page.all('.book')[4]).to have_content("100 Pictures Of Spiders")
+    end
+  end
+
 end
