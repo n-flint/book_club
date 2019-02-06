@@ -4,7 +4,6 @@
 
 <nav>
   <%= link_to 'Home', root_path %>
-  <%= link_to 'Add Book', new_book_path %>
 </nav>
 
 <section class="book-stats">
@@ -43,7 +42,7 @@
   </div>
 
 </div>
-<ul>
+<ul class='books'>
   <% @books.each do |book| %>
   <li class='book' id=<%= "book-#{book.id}" %>>
     <h3><%= link_to book.title, book_path(book) %></h3>
