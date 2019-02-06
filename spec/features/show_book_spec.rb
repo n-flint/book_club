@@ -2,18 +2,6 @@ require 'rails_helper'
 
 RSpec.describe 'when visitor visits show book', type: :feature do
 
-  #
-  #
-  #
-  #
-  #
-  # TODO test for stats
-  #
-  #
-  #
-  #
-  #
-
   before :each do
     @cover_1 = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd3cgsv8lMoNU4g8dDN1hUqKlXAR3DTITUd5rl1tMuYds_wAP6"
     @cover_2 = "https://static.seibertron.com/images/toys/uploads/1542829964-unicron-retailer-incentive-nick-roache.jpg"

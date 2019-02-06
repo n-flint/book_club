@@ -14,6 +14,14 @@ class Book < ApplicationRecord
     order(average_rating: :asc).limit(3)
   end
 
+  def self.most_reviews
+    select('books.*, count(reviews.id) as count_reviews').left_outer_joins(:reviews).group(:id).order('count_reviews desc').order(:id)
+  end
+
+  def self.least_reviews
+    select('books.*, count(reviews.id) as count_reviews').left_outer_joins(:reviews).group(:id).order('count_reviews asc')
+  end
+
   def author_names
     authors.pluck(:name).join(', ')
   end
