@@ -43,7 +43,7 @@
   </div>
 
 </div>
-<ul class='books'>
+<ul>
   <% @books.each do |book| %>
   <li class='book' id=<%= "book-#{book.id}" %>>
     <h3><%= link_to book.title, book_path(book) %></h3>

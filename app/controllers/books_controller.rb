@@ -27,9 +27,10 @@ class BooksController < ApplicationController
     elsif params[:sort] == 'pages asc'
       @books = Book.order(pages: :asc)
     elsif params[:sort] == 'reviews desc'
-      @books = Book.most_reviews
+      # @books = Book.sort_by_most_reviews
+      @books = Book.select('books.*, count(reviews.id) as count_reviews').left_outer_joins(:reviews).group(:id).order('count_reviews desc').order(:id)
     elsif params[:sort] == 'reviews asc'
-      @books = Book.least_reviews
+      @books = Book.select('books.*, count(reviews.id) as count_reviews').left_outer_joins(:reviews).group(:id).order('count_reviews asc')
     else
       @books = Book.all
     end
