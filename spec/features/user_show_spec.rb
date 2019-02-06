@@ -20,7 +20,6 @@ RSpec.describe 'when visitor visits user show page', type: :feature do
     expect(page).to have_link("Home")
     expect(page).to have_link("Browse Books")
   end
-
   it 'goes to the book index page when link is pressed' do
 
     visit user_path(@user_1.id)
@@ -56,19 +55,6 @@ RSpec.describe 'when visitor visits user show page', type: :feature do
     expect(page).to have_no_content("Title: #{@review_3.title}")
   end
 
-  it "button to delete single review" do
-
-    visit user_path(@user_1.id)
-
-    within "#review-#{@review_1.id}" do
-      expect(page).to have_button("X")
-      click_button("X")
-    end
-
-    expect(current_path).to eq(user_path(@user_1.id))
-    expect(page).to_not have_content("Title: #{@review_1.title}")
-    expect(page).to have_content("Title: #{@review_2.title}")
-  end
   it "link to sort reviews by date newest to oldest" do
 
     visit user_path(@user_1.id)
@@ -94,4 +80,5 @@ RSpec.describe 'when visitor visits user show page', type: :feature do
 
     expect(current_path).to eq(user_path(@user_1.id,))
   end
+
 end
