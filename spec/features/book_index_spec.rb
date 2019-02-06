@@ -5,15 +5,15 @@ RSpec.describe 'when visitor visits book index', type: :feature do
   before :each do
     @cover_1 = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd3cgsv8lMoNU4g8dDN1hUqKlXAR3DTITUd5rl1tMuYds_wAP6"
     @cover_2 = "https://static.seibertron.com/images/toys/uploads/1542829964-unicron-retailer-incentive-nick-roache.jpg"
-    @book_1 = Book.create(title: "100 Pictures Of Spiders", pages: 100, published: 2000, cover: @cover_1, average_rating: 2.67)
+    @book_1 = Book.create(title: "100 Pictures Of Spiders", pages: 100, published: 2000, cover: @cover_1)
     @book_1.authors.create(name: "Peregrine")
-    @book_2 = Book.create(title: "What's New Pussy Cat", pages: 200, published: 1999, cover: @cover_2, average_rating: 5.0)
+    @book_2 = Book.create(title: "What's New Pussy Cat", pages: 200, published: 1999, cover: @cover_2)
     @book_2.authors.create(name: "Noah")
-    @book_3 = Book.create(title: "Killing Time", pages: 105, published: 1992, cover: @cover_1, average_rating: 5.0)
+    @book_3 = Book.create(title: "Killing Time", pages: 105, published: 1992, cover: @cover_1)
     @book_3.authors.create(name: "Peregrine")
-    @book_4 = Book.create(title: "Testing Books", pages: 201, published: 2010, cover: @cover_1, average_rating: 2.5)
+    @book_4 = Book.create(title: "Testing Books", pages: 201, published: 2010, cover: @cover_1)
     @book_4.authors.create(name: "Peregrine")
-    @book_5 = Book.create(title: "What's UP? You Know, You Know", pages: 2, published: 2019, cover: @cover_1, average_rating: 4.0)
+    @book_5 = Book.create(title: "What's UP? You Know, You Know", pages: 2, published: 2019, cover: @cover_1)
     @book_5.authors.create(name: "Peregrine")
     @books = Book.all
 
@@ -41,6 +41,13 @@ RSpec.describe 'when visitor visits book index', type: :feature do
     @review_13 = @book_5.reviews.create(title: "Awful", user_id: @user_2.id, rating: 4, review: "Leave it!")
     @review_14 = @book_5.reviews.create(title: "Awesome", user_id: @user_2.id, rating: 5, review: "Love it!")
     @review_14 = @book_1.reviews.create(title: "Awe Inspiring", user_id: @user_2.id, rating: 5, review: "Love it!")
+
+    @book_1.update(average_rating: @book_1.average_score)
+    @book_2.update(average_rating: @book_2.average_score)
+    @book_3.update(average_rating: @book_3.average_score)
+    @book_4.update(average_rating: @book_4.average_score)
+    @book_5.update(average_rating: @book_5.average_score)
+
   end
 
   it 'can see all books' do
@@ -173,9 +180,6 @@ RSpec.describe 'when visitor visits book index', type: :feature do
 
     visit books_path
 
-    # expect(page.all('.merchant')[0]).to have_content('Merchant Name 2, Revenue: $90,000')
-    # expect(page.all('.merchant')[1]).to have_content('Merchant Name 3, Revenue: $80,200')
-    # expect(page.all('.merchant')[2]).to have_content('Merchant Name 1, Revenue: $10,000')
     click_link('high to low ratings')
 
     within ".books" do
