@@ -70,7 +70,7 @@ RSpec.describe 'when visitor visits user show page', type: :feature do
   it "link to sort reviews by date oldest to newest" do
 
     visit user_path(@user_1.id)
-    save_and_open_page
+    
     expect(page).to have_link("Oldest To Newest")
     click_link("Oldest To Newest")
 
