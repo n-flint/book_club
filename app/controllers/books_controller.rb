@@ -18,6 +18,10 @@ class BooksController < ApplicationController
   end
 
   def index
+    @best_books = Book.best
+    @worst_books = Book.worst
+    @top_users = User.most_reviews
+
     if params[:sort] == 'avg rating desc'
       @books = Book.order(average_rating: :desc)
     elsif params[:sort] == 'avg rating asc'
@@ -34,7 +38,6 @@ class BooksController < ApplicationController
     else
       @books = Book.all
     end
-    @top_users = User.most_reviews
   end
 
   def show
