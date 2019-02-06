@@ -39,6 +39,8 @@ RSpec.describe 'when visitor visits book index', type: :feature do
     @review_11 = @book_5.reviews.create(title: "An OKish Read", user_id: @user_2.id, rating: 2, review: "Probably leave it")
     @review_12 = @book_5.reviews.create(title: "BOO", user_id: @user_1.id, rating: 4, review: "I died inside")
     @review_13 = @book_5.reviews.create(title: "Awful", user_id: @user_2.id, rating: 4, review: "Leave it!")
+    @review_14 = @book_5.reviews.create(title: "Awesome", user_id: @user_2.id, rating: 5, review: "Love it!")
+    @review_14 = @book_1.reviews.create(title: "Awe Inspiring", user_id: @user_2.id, rating: 5, review: "Love it!")
   end
 
   it 'can see all books' do
@@ -218,8 +220,8 @@ RSpec.describe 'when visitor visits book index', type: :feature do
 
     within ".books" do
       expect(page.all('.book')[0]).to have_content("100 Pictures Of Spiders")
-      expect(page.all('.book')[1]).to have_content("Killing Time")
-      expect(page.all('.book')[2]).to have_content("What's UP? You Know, You Know")
+      expect(page.all('.book')[1]).to have_content("What's UP? You Know, You Know")
+      expect(page.all('.book')[2]).to have_content("Killing Time")
       expect(page.all('.book')[3]).to have_content("What's New Pussy Cat")
       expect(page.all('.book')[4]).to have_content("Testing Books")
     end
