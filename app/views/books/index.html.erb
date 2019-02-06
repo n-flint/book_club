@@ -10,14 +10,14 @@
 <section class="book-stats">
   <section id="best-books">
     <h3>Highest Rated Books</h3>
-    <% @books.best.each do |book| %>
+    <% @best_books.each do |book| %>
       <p><%= link_to book.title, book_path(book) %></p>
       <p>Rating: <%= book.average_score unless book.reviews == [] %></p>
     <% end %>
   </section>
   <section id="worst-books">
     <h3>Lowest Rated Books</h3>
-    <% @books.worst.each do |book| %>
+    <% @worst_books.each do |book| %>
       <p><%= link_to book.title, book_path(book) %></p>
       <p>Rating: <%= book.average_score unless book.reviews == [] %></p>
     <% end %>
