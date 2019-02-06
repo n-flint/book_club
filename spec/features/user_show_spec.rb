@@ -55,6 +55,30 @@ RSpec.describe 'when visitor visits user show page', type: :feature do
     expect(page).to have_no_content("Title: #{@review_3.title}")
   end
 
+  it "link to sort reviews by date newest to oldest" do
 
+    visit user_path(@user_1.id)
+    expect(page).to have_link("Newest To Oldest")
+    click_link("Newest To Oldest")
+
+    expect(page.all('.single-review')[0]).to have_content("Title: #{@review_1.title}")
+    expect(page.all('.single-review')[1]).to have_content("Title: #{@review_2.title}")
+
+
+    expect(current_path).to eq(user_path(@user_1.id,))
+  end
+  it "link to sort reviews by date oldest to newest" do
+
+    visit user_path(@user_1.id)
+    save_and_open_page
+    expect(page).to have_link("Oldest To Newest")
+    click_link("Oldest To Newest")
+
+    expect(page.all('.single-review')[0]).to have_content("Title: #{@review_1.title}")
+    expect(page.all('.single-review')[1]).to have_content("Title: #{@review_2.title}")
+
+
+    expect(current_path).to eq(user_path(@user_1.id,))
+  end
 
 end
