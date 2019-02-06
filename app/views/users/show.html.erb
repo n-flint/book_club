@@ -12,6 +12,7 @@
 
 <section class="single-review" id=<%= "review-#{review.id}" %>>
   <%= button_to "X", review_path(review.id), method: :delete %>
+
   <h3>Title: <%= review.title%></h3>
   <p>Book Title: <%= link_to review.book.title, book_path(review.book)%></p>
   <p><%= review.review%></p>
