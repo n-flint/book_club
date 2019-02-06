@@ -68,8 +68,7 @@ RSpec.describe 'when visitor visits book index', type: :feature do
   it 'goes to the add book page when link is pressed' do
 
     visit books_path
-    save_and_open_page
-    
+
     click_link("Add Book")
 
     expect(current_path).to eq(new_book_path)
